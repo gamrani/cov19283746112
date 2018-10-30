@@ -1,8 +1,0 @@
-{
-  "name": "application",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular",
-  "pro_id": "3eabe576"
-}

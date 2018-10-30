@@ -7,18 +7,17 @@ import { FormControl } from '@angular/forms';
 })
 export class RegistrationPage implements OnInit {
   
-  firstName = new FormControl('');
-  lastName = new FormControl('');
-  email = new FormControl('');
-  phone = new FormControl('');
-  password = new FormControl('');
-  sexe = new FormControl('');
+  hideFirstCard = false;
+  hideSecondCard = true;
+  
 
   submit(){
-    console.log(this.firstName.value);
   }
   constructor() { }
-
+  continuer(){
+    this.hideFirstCard=true;
+    this.hideSecondCard=false;
+ }
   ngOnInit() {
   }
 
