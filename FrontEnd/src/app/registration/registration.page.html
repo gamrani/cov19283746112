@@ -50,6 +50,11 @@
                                              </div>   
                                         </div>
                                 </div>
+                                <div class="form-group col-md-5">
+                                       Date de naissance <br>
+                                             <input id="birthday" type="date" class="form-control" #birthday="ngModel" name="birthday" placeholder="Date de naissance" [(ngModel)]=user.birthday>
+                                     
+                                </div>
                             </div>
                         </div>
                         <button class="btn btn-info" (click)="card1done()" [hidden]="sexe.invalid || firstName.invalid || lastName.invalid">Continuer</button>
@@ -112,6 +117,7 @@
                             </div>
                         </div>
                         <div style="margin-top: 1em;" [hidden]="hideThirdCard">
+                            <span *ngIf="error">cette utilisateur existe déjà</span>
                             <input type="submit" class="btn btn-primary btn-lg btn-block" value="Créer mon compte" [disabled]="password.invalid || passwordConf.invalid || user.password!=user.passwordConf" (click)="submit()">
                           </div>
                     </div>

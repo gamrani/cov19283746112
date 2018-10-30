@@ -6,5 +6,6 @@ export class User {
   public password : string;
   public passwordConf : string;
   public sexe: string ;
+  public birthday : Date;
     constructor(){}
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {User} from '../../models/User';
+import {RegistrationService} from '../services/registration.service';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
@@ -14,13 +16,20 @@ export class RegistrationPage implements OnInit {
   step1 = true;
   step2 = true;
   step3 = true;
-
+  error = false;
   user = new User();
+
+
+  constructor(private registrationService : RegistrationService) { }
 
   submit(){
     this.step3=false;
+     
+    this.registrationService.registration(this.user).subscribe(
+      data => {if(data == null){ this.error=true;}}
+    );
   }
-  constructor() { }
+
   card1done(){
     this.hideFirstCard=true;
     this.hideSecondCard=false;

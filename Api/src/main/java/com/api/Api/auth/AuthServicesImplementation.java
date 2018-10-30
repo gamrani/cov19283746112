@@ -13,7 +13,9 @@ public class AuthServicesImplementation implements AuthServices {
 	
 	@Override
 	public User registration(User user) {
+		System.out.println("registration service");
 		User user_from_db = dao.findByEmail(user.getEmail());
+		System.out.println(user_from_db);
 		if(user_from_db==null) {
 			return null;
 		}else {

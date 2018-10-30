@@ -1,6 +1,7 @@
 package com.api.Api.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,10 @@ public class AuthController {
 	@Autowired
 	AuthServices services;
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/registration",method=RequestMethod.POST)
 	public User registration(@RequestBody User user) {
+		System.out.println("registration controller");
 		return services.registration(user);
 		
 	}
