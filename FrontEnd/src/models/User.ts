@@ -1,8 +1,10 @@
-export class PersonalData {
-    firstName : string ='';
-    lastName : string = '';
-    email: string = '';
-    phone : string = '';
-    password : string = '';
-    sexe: string = '';
+export class User {
+  public firstName : string;
+  public lastName : string;
+  public email: string;
+  public phone : string;
+  public password : string;
+  public passwordConf : string;
+  public sexe: string ;
+    constructor(){}
   }

@@ -11,7 +11,7 @@
         </div>
         <div class="container" style="margin-top: 1em;">
                 <!-- Sign up form -->
-                <form>
+                <form #userForm="ngForm">
                     <!-- Sign up card -->
                     <div class="card person-card" [hidden]="hideFirstCard">
                         <div class="card-body">
@@ -22,19 +22,19 @@
                             <!-- First row (on medium screen) -->
                             <div class="row">
                                 <div class="form-group col-md-2">
-                                    <select id="input_sex" class="form-control" >
+                                    <select id="input_sex" class="form-control" name="sexe" [(ngModel)]=user.sexe>
                                         <option value="Mr.">Mr.</option>
                                         <option value="Ms.">Ms.</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <input id="first_name" type="text" class="form-control"  placeholder="Nom">
+                                    <input id="first_name" type="text" class="form-control" name="firstName"  placeholder="Nom" [(ngModel)]=user.firstName>
                                     <div id="first_name_feedback" class="invalid-feedback">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <input id="last_name" type="text" class="form-control"  placeholder="Prénom">
+                                    <input id="last_name" type="text" class="form-control" name="lastName" placeholder="Prénom" [(ngModel)]=user.lastName>
                                     <div id="last_name_feedback" class="invalid-feedback">
                                         
                                     </div>
@@ -52,14 +52,14 @@
                                     <h2 class="card-title">Comment vous contacter ?</h2>
                                     <div class="form-group">
                                         <label for="email" class="col-form-label" >Email</label>
-                                        <input type="email" class="form-control" id="email"  placeholder="example@gmail.com" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required [(ngModel)]=user.email> 
                                         <div class="email-feedback">
                                         
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tel" class="col-form-label">Phone number</label>
-                                        <input type="text" class="form-control" id="tel"  placeholder="+212 6 99 99 99 99" required>
+                                        <input type="text" class="form-control" id="tel" name="phone" placeholder="+212 6 99 99 99 99" required [(ngModel)]=user.phone>
                                         <div class="phone-feedback">
                                         
                                         </div>
@@ -74,14 +74,14 @@
                                     <h2 class="card-title">Sécurisé votre compte !</h2>
                                     <div class="form-group">
                                         <label for="password" class="col-form-label">Mot de passe</label>
-                                        <input type="password" class="form-control" id="password"  placeholder="Type your password" required>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Type your password" required [(ngModel)]=user.password>
                                         <div class="password-feedback">
                                         
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="password_conf" class="col-form-label">Mot de passe (confirmation)</label>
-                                        <input type="password" class="form-control" id="password_conf" placeholder="Type your password again" required>
+                                        <input type="password" class="form-control" id="password_conf" name="passwordConf" placeholder="Type your password again" required [(ngModel)]=user.passwordConf>
                                         <div class="password_conf-feedback">
                                         
                                         </div>
