@@ -89,7 +89,7 @@
                                    Ce numero appartient déjà à un utilisateur   
                               </div>
                         </div>
-                        <button class="btn btn-info" (click)="card2done()" *ngIf="phone.valid && email.valid">Continuer</button>
+                        <button class="btn btn-info" (click)="verifyEmailPhone()" *ngIf="phone.valid && email.valid">Continuer</button>
                     </div>
 
                     <div class="card person-card" [hidden]="hideThirdCard">
@@ -100,20 +100,25 @@
                                 <h2 class="card-title">Sécurisé votre compte !</h2>
                             <!-- First row (on medium screen) -->
                             <div class="row">
-                                    <div class="form-group col-md-6">
-                                        
-                                        <input type="password" class="form-control" id="password" #password="ngModel" name="password" placeholder="Mot de passe" required [(ngModel)]=user.password>
-                                        <div class="password-feedback">
-                                        
-                                        </div>
+                                    <div class="form-group input-group add-on col-md-6">
+                                            <input type="{{password_type}}" class="form-control" id="password" #password="ngModel" name="password" placeholder="Mot de passe" required [(ngModel)]=user.password>
+                                            <div class="input-group-btn" *ngIf="password.valid">
+                                                <button class="btn btn-light" (click)="password_type='password'" *ngIf="password_type =='text'"> <ion-icon name="eye"></ion-icon></button>
+                                                <button class="btn btn-light" (click)="password_type='text'" *ngIf="password_type =='password'"> <ion-icon name="eye-off"></ion-icon></button>
+                                            </div>   
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="password" class="form-control" id="password_conf" #passwordConf="ngModel" name="passwordConf" placeholder="Confirmation du mot de passe" required [(ngModel)]=user.passwordConf>
-                                        <br>
-                                        <div class="password_conf-feedback alert alert-danger" *ngIf="password.valid && passwordConf.valid && passwordConf.touched && user.password!=user.passwordConf">
-                                         Les deux mots de passe doivent correspondre
-                                        </div>
+                                    <div class="form-group input-group add-on col-md-6">
+                                            <input type="{{passwordc_type}}" class="form-control" id="password_conf" #passwordConf="ngModel" name="passwordConf" placeholder="Confirmation du mot de passe" required [(ngModel)]=user.passwordConf>
+                                            <div class="input-group-btn" *ngIf="passwordConf.valid">
+                                                    <button class="btn btn-light" (click)="passwordc_type='password'" *ngIf="passwordc_type =='text'"> <ion-icon name="eye"></ion-icon></button>
+                                                    <button class="btn btn-light" (click)="passwordc_type='text'" *ngIf="passwordc_type =='password'"> <ion-icon name="eye-off"></ion-icon></button>
+                                                </div>     
                                     </div>
+                                    <br>
+                                    <div class="password_conf-feedback alert alert-danger" *ngIf="password.valid && passwordConf.valid && user.password!=user.passwordConf">
+                                     Les deux mots de passe doivent correspondre
+                                    </div>  
+                                   
                             </div>
                         </div>
                         <div style="margin-top: 1em;" [hidden]="hideThirdCard">

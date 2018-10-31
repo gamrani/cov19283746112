@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
   constructor(private router: Router) { }
-  registrationForm(){
-    this.router.navigateByUrl('/Registration');
+  loginForm(){
+    this.router.navigateByUrl('/connexion');
   }
 }

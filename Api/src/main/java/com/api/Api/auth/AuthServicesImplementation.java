@@ -14,7 +14,7 @@ public class AuthServicesImplementation implements AuthServices {
 	@Override
 	public User registration(User user) {
 	
-		if(emailExists(user.getEmail()) && phoneExists(user.getPhone())) {
+		if(emailExists(user.getEmail()) || phoneExists(user.getPhone())) {
 			return null;
 		}else {
 			return dao.save(user);
