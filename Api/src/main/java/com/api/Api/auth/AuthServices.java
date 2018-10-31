@@ -8,4 +8,6 @@ import com.api.Api.models.User;
 public interface AuthServices {
 
 	public User registration(User user);
+	public boolean emailExists(String email);
+	public boolean phoneExists(Long phone);
 }

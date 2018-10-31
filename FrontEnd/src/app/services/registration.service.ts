@@ -22,5 +22,13 @@ export class RegistrationService {
     return this.http.post<User>(this.apiUrl,user,httpOptions);
   }
 
+  // check email and phone existance
+  checkEmail(email:string) : Observable<Boolean>{
+    return this.http.get<Boolean>(this.apiUrl+"/email/"+email);
+  }
+  checkPhone(phone:number) : Observable<Boolean>{
+    return this.http.get<Boolean>(this.apiUrl+"/phone/"+phone);
+  }
+
   
 }

@@ -8,4 +8,5 @@ import com.api.Api.models.User;
 @Repository
 public interface AuthDAO extends JpaRepository<User,Long> {
      public User findByEmail(String email);
+     public User findByPhone(Long phone);
 }

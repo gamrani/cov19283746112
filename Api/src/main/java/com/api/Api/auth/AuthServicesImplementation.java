@@ -13,15 +13,35 @@ public class AuthServicesImplementation implements AuthServices {
 	
 	@Override
 	public User registration(User user) {
-		System.out.println("registration service");
-		User user_from_db = dao.findByEmail(user.getEmail());
-		System.out.println(user_from_db);
-		if(user_from_db==null) {
+	
+		if(emailExists(user.getEmail()) && phoneExists(user.getPhone())) {
 			return null;
 		}else {
 			return dao.save(user);
 		}
 		
 	}
+	
+
+	@Override
+	public boolean emailExists(String email) {
+        boolean r = false;
+		if(dao.findByEmail(email)!=null) {
+			r = true;
+		}
+		return r;
+	}
+
+
+	@Override
+	public boolean phoneExists(Long phone) {
+		 boolean r = false;
+			if(dao.findByPhone(phone)!=null) {
+				r = true;
+			}
+			return r;
+	}
+
+	
 
 }

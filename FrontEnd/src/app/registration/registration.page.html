@@ -74,20 +74,20 @@
                                         <div class="input-group-btn" *ngIf="email.valid">
                                             <button class="btn btn-light" (click)="user.email=''"> <ion-icon name="trash"></ion-icon></button>
                                         </div>
-                                        <div class="email-feedback">
-                                        
-                                        </div>
                                     </div>
                                     <div class="form-group input-group add-on col-md-6">
                                         <input type="tel" class="form-control" id="tel" #phone="ngModel" name="phone" pattern="[0-9]+" placeholder="0699999999" required [(ngModel)]=user.phone>
                                         <div class="input-group-btn" *ngIf="phone.valid">
                                             <button class="btn btn-light" (click)="user.phone=''"> <ion-icon name="trash"></ion-icon></button>
-                                        </div>
-                                        <div class="phone-feedback">
-                                        
-                                        </div>
+                                        </div>   
                                     </div>
                             </div>
+                            <div class="alert alert-danger" *ngIf="emailExist ">
+                                  Cette addresse mail appartient déjà à un utilisateur   
+                            </div>
+                            <div class="alert alert-danger" *ngIf="phoneExist ">
+                                   Ce numero appartient déjà à un utilisateur   
+                              </div>
                         </div>
                         <button class="btn btn-info" (click)="card2done()" *ngIf="phone.valid && email.valid">Continuer</button>
                     </div>

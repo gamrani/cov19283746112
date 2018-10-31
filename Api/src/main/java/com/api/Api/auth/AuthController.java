@@ -16,12 +16,25 @@ public class AuthController {
 
 	@Autowired
 	AuthServices services;
+	private int phone;
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/registration",method=RequestMethod.POST)
 	public User registration(@RequestBody User user) {
 		System.out.println("registration controller");
 		return services.registration(user);
-		
+	}
+	
+	@CrossOrigin(origins="*")
+	@RequestMapping(value="/registration/email/{email}",method=RequestMethod.GET)
+	public boolean checkEmail(@PathVariable("email") String email) {
+		return services.emailExists(email);
+	}
+	
+	@CrossOrigin(origins="*")
+	@RequestMapping(value="/registration/phone/{phone}",method=RequestMethod.GET)
+	public boolean checkPhone(@PathVariable("phone") String phone) {
+		Long tel = Long.parseLong(phone);
+		return services.phoneExists(tel);
 	}
 }

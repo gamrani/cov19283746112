@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {User} from '../../models/User';
 import {RegistrationService} from '../services/registration.service';
+import { Services } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-registration',
@@ -17,6 +18,8 @@ export class RegistrationPage implements OnInit {
   step2 = true;
   step3 = true;
   error = false;
+  emailExist : boolean = false;
+  phoneExist : boolean = false;
   user = new User();
 
 
@@ -30,6 +33,35 @@ export class RegistrationPage implements OnInit {
     );
   }
 
+  verifyEmail():boolean{
+    this.registrationService.checkEmail(this.user.email).subscribe(
+      data => {
+        if(data == true){
+           this.emailExist = true;
+        }else{
+          this.emailExist = false;
+        }
+      }
+      
+    );
+    return this.emailExist;    
+  }
+
+  verifyPhone():boolean {
+    this.registrationService.checkPhone(this.user.phone).subscribe(
+      data => {
+        if(data == true ){
+          this.phoneExist = true;
+        }else{
+          this.phoneExist = false;
+        }
+      }
+    );
+    return this.phoneExist;
+  }
+
+
+
   card1done(){
     this.hideFirstCard=true;
     this.hideSecondCard=false;
@@ -37,10 +69,12 @@ export class RegistrationPage implements OnInit {
     this.step1 = false;
  }
  card2done(){
-  this.hideFirstCard=true;
-  this.hideSecondCard=true;
-  this.hideThirdCard=false;
-  this.step2 = false;
+   if(this.verifyEmail()==false && this.verifyPhone()==false){
+    this.hideFirstCard=true;
+    this.hideSecondCard=true;
+    this.hideThirdCard=false;
+    this.step2 = false;
+   }
  }
   ngOnInit() {
     this.hideFirstCard = false;

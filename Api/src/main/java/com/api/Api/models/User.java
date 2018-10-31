@@ -27,7 +27,7 @@ public class User {
 	private String lastName;
 
 	@Column
-	private int phone;
+	private Long phone;
 
 	@Column
 	private String password;
@@ -42,7 +42,7 @@ public class User {
 		super();
 	}
 
-	public User(String email, String firstName, String lastName, int phone, String password, String birthday,
+	public User(String email, String firstName, String lastName, Long phone, String password, String birthday,
 			String sexe) {
 		super();
 		this.email = email;
@@ -86,11 +86,11 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public int getPhone() {
+	public Long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(Long phone) {
 		this.phone = phone;
 	}
 
