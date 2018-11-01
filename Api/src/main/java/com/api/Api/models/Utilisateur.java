@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class Utilisateur {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,11 +38,11 @@ public class User {
 	@Column
 	private String sexe;
 
-	public User() {
+	public Utilisateur() {
 		super();
 	}
 
-	public User(String email, String firstName, String lastName, Long phone, String password, String birthday,
+	public Utilisateur(String email, String firstName, String lastName, Long phone, String password, String birthday,
 			String sexe) {
 		super();
 		this.email = email;
