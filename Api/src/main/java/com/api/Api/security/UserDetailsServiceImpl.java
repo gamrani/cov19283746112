@@ -8,6 +8,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import static java.util.Collections.emptyList;
+
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import com.api.Api.models.Utilisateur;
 import com.api.Api.registration.UserRepository;
 
@@ -18,13 +23,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UserRepository userRepository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Utilisateur utilisateur = userRepository.findByEmail(email);
+	@Transactional
+	public UserDetails loadUserByUsername(String emailOrPhone) throws UsernameNotFoundException {
+		Utilisateur utilisateur = userRepository.findByEmailOrPhone(emailOrPhone, Long.parseLong(emailOrPhone));
 		
 		if(utilisateur == null) {
-			throw new UsernameNotFoundException(email);
+			throw new UsernameNotFoundException(emailOrPhone);
 		}
-		return  new User(utilisateur.getEmail(),utilisateur.getPassword(),emptyList());
+		
+      return UserPrincipal.create(utilisateur);
+	}
+	
+	public UserDetails loadUserById(Long id) {
+		Utilisateur user =  userRepository.findOneById(id);
+		if(user == null) {
+			throw new UsernameNotFoundException("User not found with id :"+id.toString());
+		}
+		
+		return UserPrincipal.create(user);
 	}
 
 }

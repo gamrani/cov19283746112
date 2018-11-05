@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RegistrationService {
-  apiUrl = "http://localhost:8080/auth/registration";
+  apiUrl = "http://localhost:8080/users/sign-up";
   constructor(private http: HttpClient) { }
 
   // user registration

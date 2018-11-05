@@ -1,5 +1,7 @@
 package com.api.Api.registration;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +13,7 @@ public class RegistrationServicesImplementation implements RegistrationServices 
 	@Autowired
 	private UserRepository dao;
 	
-	
+	/** Sign up **/
 	@Override
 	public Utilisateur registration(Utilisateur utilisateur) {
 	
@@ -23,7 +25,14 @@ public class RegistrationServicesImplementation implements RegistrationServices 
 		
 	}
 	
+	/** Log in **/
+	@Override
+	public boolean Login(Utilisateur user) {
+		return false;
+	}
+	
 
+   
 	@Override
 	public boolean emailExists(String email) {
         boolean r = false;
@@ -43,12 +52,32 @@ public class RegistrationServicesImplementation implements RegistrationServices 
 			return r;
 	}
 
+	@Override
+	public Utilisateur findByEmailOrPhone(String email, Long phone) {
+		// TODO Auto-generated method stub
+		return dao.findByEmailOrPhone(email, phone);
+	}
 
 	@Override
-	public void save(Utilisateur user) {
-      dao.save(user);		
+	public Utilisateur findById(Long id) {
+		// TODO Auto-generated method stub
+		return dao.findOneById(id);
+	}
+
+	@Override
+	public Utilisateur findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return dao.findByEmail(email);
+	}
+
+	@Override
+	public int setToken(String token, Long id) {
+		// TODO Auto-generated method stub
+		return dao.setToken(token, id);
 	}
 
 	
 
+
+	
 }

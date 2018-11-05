@@ -1,17 +1,16 @@
 package com.api.Api.models;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "user")
-public class Utilisateur {
+public class Utilisateur implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +36,16 @@ public class Utilisateur {
 
 	@Column
 	private String sexe;
+	
+	@Column
+	private String token;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles",
+	           joinColumns = @JoinColumn(name="user_id"),
+	           inverseJoinColumns = @JoinColumn(name="role_id")
+			  )
+	private Set<Role> roles = new HashSet<>();
 
 	public Utilisateur() {
 		super();
@@ -52,6 +61,22 @@ public class Utilisateur {
 		this.password = password;
 		this.birthday = birthday;
 		this.sexe = sexe;
+	}
+	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public Long getId() {

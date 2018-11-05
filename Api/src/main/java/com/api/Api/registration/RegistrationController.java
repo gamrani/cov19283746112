@@ -1,6 +1,16 @@
 package com.api.Api.registration;
 
+import java.util.Collection;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,44 +20,78 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.Api.models.Utilisateur;
+import com.api.Api.security.JwtAuthenticationResponse;
+import com.api.Api.security.JwtTokenProvider;
+import com.api.Api.security.UserPrincipal;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class RegistrationController {
 
 	@Autowired
 	RegistrationServices services;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	@Autowired
+	private JwtTokenProvider tokenProvider;
+
 	private int phone;
-	
-	@CrossOrigin(origins = "*")
-	@RequestMapping(value="/registration",method=RequestMethod.POST)
+
+	/** Sign up **/
+	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
 	public Utilisateur registration(@RequestBody Utilisateur utilisateur) {
 		// Crypter le mot de passe
 		utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
 		return services.registration(utilisateur);
 	}
-	
-	@CrossOrigin(origins="*")
-	@RequestMapping(value="/sign-up",method=RequestMethod.POST)
-	public void signUp(@RequestBody Utilisateur user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        services.save(user);
+
+	/** Log in **/
+	// by email and password
+	@RequestMapping(value = "/sign-in", method = RequestMethod.POST)
+	public String loginByEmail(@Valid @RequestBody Utilisateur user) {
+
+		
+		
+		Utilisateur user_login = services.findByEmailOrPhone(user.getEmail(),user.getPhone());
+		
+		if (bCryptPasswordEncoder.matches(user.getPassword(), user_login.getPassword())) {
+			String jwt = tokenProvider.genrateToken(user_login);
+			services.setToken(jwt, user_login.getId());
+			return jwt;
+
+		} else {
+			return "error";
+		}
+
 	}
-	
-	@CrossOrigin(origins="*")
-	@RequestMapping(value="/registration/email/{email}",method=RequestMethod.GET)
+
+	// by phone number and password
+	@RequestMapping(value = "/log-in/{phone}/{password}", method = RequestMethod.GET)
+	public Utilisateur loginByPhone(@PathVariable("email") String phone, @PathVariable("password") String password) {
+
+		return null;
+	}
+
+	/** Log out **/
+	@RequestMapping(value = "/log-out", method = RequestMethod.GET)
+	public void logout(@RequestBody Utilisateur utilisateur) {
+
+	}
+
+	@RequestMapping(value = "/sign-up/email/{email}", method = RequestMethod.GET)
 	public boolean checkEmail(@PathVariable("email") String email) {
 		return services.emailExists(email);
 	}
-	
-	@CrossOrigin(origins="*")
-	@RequestMapping(value="/registration/phone/{phone}",method=RequestMethod.GET)
+
 	public boolean checkPhone(@PathVariable("phone") String phone) {
 		Long tel = Long.parseLong(phone);
 		return services.phoneExists(tel);
 	}
+
 }
