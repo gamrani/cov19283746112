@@ -11,13 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule,MatSelectModule} from '@angular/material';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {CitiesService} from './services/cities.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,MatSelectModule,HttpClientModule,BrowserAnimationsModule,MatButtonModule,MatAutocompleteModule, MatCheckboxModule],
   providers: [
-    StatusBar,
+    StatusBar,CitiesService,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

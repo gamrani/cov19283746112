@@ -1,4 +1,4 @@
-package com.api.Api.registration;
+package com.api.Api.controller;
 
 import java.util.Collection;
 
@@ -23,6 +23,7 @@ import com.api.Api.models.Utilisateur;
 import com.api.Api.security.JwtAuthenticationResponse;
 import com.api.Api.security.JwtTokenProvider;
 import com.api.Api.security.UserPrincipal;
+import com.api.Api.services.RegistrationServices;
 
 @RestController
 @RequestMapping("/users")

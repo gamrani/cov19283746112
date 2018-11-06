@@ -1,4 +1,4 @@
-package com.api.Api.registration;
+package com.api.Api.models;
 
 import javax.validation.constraints.NotBlank;
 

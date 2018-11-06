@@ -14,7 +14,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import com.api.Api.models.Utilisateur;
-import com.api.Api.registration.UserRepository;
+import com.api.Api.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

@@ -1,4 +1,4 @@
-package com.api.Api.registration;
+package com.api.Api.services;
 
 import java.util.Optional;
 
@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.api.Api.models.Utilisateur;
+import com.api.Api.repository.UserRepository;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Component
 public class RegistrationServicesImplementation implements RegistrationServices {

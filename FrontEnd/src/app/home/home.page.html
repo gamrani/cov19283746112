@@ -1,11 +1,46 @@
 <ion-header>
-  <ion-toolbar>
-      
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-segment id="segment" [(ngModel)]="icons">
+          <ion-segment-button class="menu" value="menu">
+              <ion-icon class="icon" name="menu"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button class="menu" value="favoris">
+              <ion-icon class="icon" name="bookmark"></ion-icon>
+              <span class="text">Favoris</span>
+          </ion-segment-button>
+          <ion-segment-button class="menu" value="login">
+              <ion-icon class="icon" *ngIf="true" name="log-in"></ion-icon> 
+              <span class="text">Connexion</span>  
+              <ion-icon class="icon" *ngIf="false" name="log-out"></ion-icon> 
+                       
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
-  <button (click)= "loginForm()" class="btn btn-success"><ion-icon name="create"></ion-icon> Log in </button>
-
   
-</ion-content>
+  
+  <ion-content class="body">
+        <app-proposer *ngIf="proposer"></app-proposer>
+  </ion-content>
+  
+  
+  <ion-footer no-border>
+  
+      <ion-toolbar>
+          <ion-segment id="segment" [(ngModel)]="icons">
+            <ion-segment-button class="proposer" value="proposer" (click)="onClickProposer()">
+              <ion-icon class="icon" name="add"></ion-icon>
+              <span class="text">Proposer</span>
+            </ion-segment-button>
+            <ion-segment-button class="chercher" value="demander" (click)="onClickChercher()">
+              <ion-icon class="icon" name="search"></ion-icon>
+              <span class="text">Chercher</span>
+            </ion-segment-button>
+            <ion-segment-button class="profil" value="profil" (click)="onClickProfil()">
+                <ion-icon class="icon" name="contact"></ion-icon>
+                <span class="text">Mon profil</span>
+              </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
+  
+  </ion-footer>
