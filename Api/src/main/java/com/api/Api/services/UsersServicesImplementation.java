@@ -1,5 +1,6 @@
 package com.api.Api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import com.api.Api.repository.UserRepository;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Component
-public class RegistrationServicesImplementation implements RegistrationServices {
+public class UsersServicesImplementation implements UsersServices {
 
 	@Autowired
 	private UserRepository dao;
@@ -79,6 +80,9 @@ public class RegistrationServicesImplementation implements RegistrationServices 
 	}
 
 	
+	public List<Utilisateur> findAllUsers(){
+	   return dao.findAll();
+	}
 
 
 	

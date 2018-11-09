@@ -1,15 +1,21 @@
 package com.api.Api.models;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="ville")
-public class Ville {
+public class Ville implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,6 +52,10 @@ public class Ville {
 	public void setRegion(Long region) {
 		this.region = region;
 	}
+	
+
+	
+
 	
 	
 }

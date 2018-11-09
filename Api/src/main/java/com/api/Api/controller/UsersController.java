@@ -1,6 +1,7 @@
 package com.api.Api.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -13,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,15 +25,15 @@ import com.api.Api.models.Utilisateur;
 import com.api.Api.security.JwtAuthenticationResponse;
 import com.api.Api.security.JwtTokenProvider;
 import com.api.Api.security.UserPrincipal;
-import com.api.Api.services.RegistrationServices;
+import com.api.Api.services.UsersServices;
 
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "*")
-public class RegistrationController {
+public class UsersController {
 
 	@Autowired
-	RegistrationServices services;
+	private UsersServices services;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -95,4 +97,8 @@ public class RegistrationController {
 		return services.phoneExists(tel);
 	}
 
+	@GetMapping("/all")
+	public List<Utilisateur> getAllUsers(){
+		return services.findAllUsers();
+	}
 }
