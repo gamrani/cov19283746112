@@ -38,7 +38,12 @@ export class ProposerPage implements OnInit {
   date_retour_min;
   dateNotValid = false;
 
+  hours ;
+
   constructor(private citiesService : CitiesService,private dateTimeService:DateTimeService) {
+    this.date_aller = this.dateTimeService.parseDateToStringWithFormat(new Date());
+    this.date_retour = this.dateTimeService.parseDateToStringWithFormat(new Date());
+    this.hours = Array(23).fill(0).map((x,i)=>i);
     try {
       this.citiesService.getJSon().subscribe(result => {
         this.cities = result;
@@ -56,9 +61,11 @@ export class ProposerPage implements OnInit {
       return true;
     } 
     
-    return true;
+    return false;
   }
-
+  confirmAnnonce():boolean{
+    return false;
+  }
   chooseTripType(type:string){
     this.tripType = type;
     if(this.tripType == "aller"){
@@ -118,9 +125,23 @@ export class ProposerPage implements OnInit {
       this.step3 = false;
     }
     if(step == "step3"){
-      this.step1 = false;
-      this.step2 = false;
-      this.step3 = true;
+      if(this.tripType == "aller"){
+        if(this.dateTimeService.dateChoosedIsLower(new Date(this.date_aller))==false){
+          this.step1 = false;
+          this.step2 = false;
+          this.step3 = true;
+        }else{
+          this.dateNotValid = true;
+        }
+      }else if(this.tripType == "allerRetour"){
+        if(this.dateTimeService.dateChoosedIsLower(new Date(this.date_aller))==false && this.dateTimeService.dateChoosedIsLower(new Date(this.date_retour))==false){
+          this.step1 = false;
+          this.step2 = false;
+          this.step3 = true;
+        }else{
+          this.dateNotValid = true;
+        }
+      }
     } 
   }
 

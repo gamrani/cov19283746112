@@ -25,13 +25,16 @@ export class DateTimeService {
 
   public dateChoosedIsLower(date : Date):boolean{
      let now = new Date();
-     if(date.getFullYear < now.getFullYear){
-       return true;
-     }else if (date.getMonth < now.getMonth){
-       return true;
-     }else if (date.getDay < now.getDay){
-             return true;
+     let result:boolean = false;
+     if(date.getFullYear() < now.getFullYear()){
+       result = true;
      }
-     return false;
+     if (date.getMonth() < now.getMonth()){
+       result = true;
+     }
+     if (date.getDay() < now.getDay()){
+        result = true;
+     }
+     return result;
   }
 }
