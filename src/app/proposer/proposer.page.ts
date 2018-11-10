@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CitiesService} from '../services/cities.service';
 import {DateTimeService} from '../services/date-time.service';
 import {Constant} from './constants';
-
+import {Annonce} from '../../models/Annonce';
 
 @Component({
   selector: 'app-proposer',
@@ -10,11 +10,11 @@ import {Constant} from './constants';
   styleUrls: ['./proposer.page.scss'],
 })
 export class ProposerPage implements OnInit {
+
+  annonce: Annonce = new Annonce();
+
   cities:any;
-  city_destination;
-  city_depart;
-  city_escale;
-  escale;
+  isEscale;
   step1 = true;
   step2 = false;
   step3 = false;
@@ -26,23 +26,24 @@ export class ProposerPage implements OnInit {
   class5 = "notClicked";
   class6 = "notClicked";
   class7 = "notClicked";
-  numberOfPlace = 0;
   classAutoroute = "roadClicked";
   classNational = "roadNotClicked";
   classAllerSimple = "roadClicked";
   classAllerRetour = "roadNotClicked";
-  tripType ="aller";
-  date_aller;
-  date_retour;
-  date_aller_min;
-  date_retour_min;
+  dateDepart_min;
+  dateArrivee_min;
   dateNotValid = false;
 
   hours ;
 
   constructor(private citiesService : CitiesService,private dateTimeService:DateTimeService) {
-    this.date_aller = this.dateTimeService.parseDateToStringWithFormat(new Date());
-    this.date_retour = this.dateTimeService.parseDateToStringWithFormat(new Date());
+    this.annonce.places = 0;
+    this.annonce.typeVoyage ="Aller simple";
+    this.annonce.typeRoute = "Autoroute";
+
+
+    this.annonce.dateDepart = this.dateTimeService.parseDateToStringWithFormat(new Date());
+    this.annonce.dateArrivee = this.dateTimeService.parseDateToStringWithFormat(new Date());
     this.hours = Array(23).fill(0).map((x,i)=>i);
     try {
       this.citiesService.getJSon().subscribe(result => {
@@ -57,7 +58,7 @@ export class ProposerPage implements OnInit {
   }
   
   step2Completed():boolean{
-    if(this.numberOfPlace!=0){
+    if(this.annonce.places!=0){
       return true;
     } 
     
@@ -66,35 +67,40 @@ export class ProposerPage implements OnInit {
   confirmAnnonce():boolean{
     return false;
   }
+  valider(){
+    alert(JSON.stringify(this.annonce));
+  }
   chooseTripType(type:string){
-    this.tripType = type;
-    if(this.tripType == "aller"){
+    this.annonce.typeVoyage = type;
+    this.annonce.typeVoyage = type;
+    if(this.annonce.typeVoyage == "Aller simple"){
       this.classAllerSimple = "roadClicked";
       this.classAllerRetour = "roadNotClicked";
     }
-    if(this.tripType == "allerRetour"){
+    if(this.annonce.typeVoyage == "Aller retour"){
       this.classAllerSimple = "roadNotClicked";
       this.classAllerRetour = "roadClicked";
     }
-    this.date_aller = this.dateTimeService.parseDateToStringWithFormat(new Date());
-    this.date_retour = this.dateTimeService.parseDateToStringWithFormat(new Date());
-    this.date_aller_min = this.dateTimeService.parseDateToStringWithFormat(new Date());
-    this.date_retour_min = this.date_aller;
-    this.tripType = type;
+    this.annonce.dateDepart = this.dateTimeService.parseDateToStringWithFormat(new Date());
+    this.annonce.dateArrivee = this.dateTimeService.parseDateToStringWithFormat(new Date());
+    this.dateDepart_min = this.dateTimeService.parseDateToStringWithFormat(new Date());
+    this.dateArrivee_min = this.annonce.dateDepart;
+    this.annonce.typeVoyage = type;
   }
 
   chooseRoad(road:string){
-    if(road == "national"){
+    this.annonce.typeRoute = road;
+    if(road == "Nationale"){
           this.classNational = "roadClicked";
           this.classAutoroute = "roadNotClicked";
     }
-    if(road == "autoroute"){
+    if(road == "Autoroute"){
       this.classNational = "roadNotClicked";
       this.classAutoroute = "roadClicked";
     }
   }
   areCitiesDefined():boolean{
-    if(this.city_destination == undefined || this.city_depart == undefined || (this.city_escale == undefined && this.escale) || this.citiesAreEquals())
+    if(this.annonce.cityDestination == undefined || this.annonce.cityDepart == undefined || (this.annonce.escales == undefined && this.isEscale) || this.citiesAreEquals())
     {
       return false;
     }
@@ -102,16 +108,16 @@ export class ProposerPage implements OnInit {
   }
 
   citiesAreEquals():boolean{
-    if(this.city_destination!= undefined && this.city_depart!=undefined)
+    if(this.annonce.cityDestination!= undefined && this.annonce.cityDepart!=undefined)
     {
-      if(this.city_destination == this.city_depart){
+      if(this.annonce.cityDestination == this.annonce.cityDepart){
         return true;
       }
-      if(this.escale){
-        if(this.city_destination == this.city_escale){
+      if(this.isEscale){
+        if(this.annonce.cityDestination == this.annonce.escales){
           return true;
         }
-        if(this.city_depart == this.city_escale){
+        if(this.annonce.cityDepart == this.annonce.escales){
           return true;
         }
       }
@@ -125,16 +131,16 @@ export class ProposerPage implements OnInit {
       this.step3 = false;
     }
     if(step == "step3"){
-      if(this.tripType == "aller"){
-        if(this.dateTimeService.dateChoosedIsLower(new Date(this.date_aller))==false){
+      if(this.annonce.typeVoyage == "Aller simple"){
+        if(this.dateTimeService.dateChoosedIsLower(new Date(this.annonce.dateDepart))==false){
           this.step1 = false;
           this.step2 = false;
           this.step3 = true;
         }else{
           this.dateNotValid = true;
         }
-      }else if(this.tripType == "allerRetour"){
-        if(this.dateTimeService.dateChoosedIsLower(new Date(this.date_aller))==false && this.dateTimeService.dateChoosedIsLower(new Date(this.date_retour))==false){
+      }else if(this.annonce.typeVoyage == "Aller retour"){
+        if(this.dateTimeService.dateChoosedIsLower(new Date(this.annonce.dateDepart))==false && this.dateTimeService.dateChoosedIsLower(new Date(this.annonce.dateArrivee))==false){
           this.step1 = false;
           this.step2 = false;
           this.step3 = true;
@@ -146,6 +152,7 @@ export class ProposerPage implements OnInit {
   }
 
   howMuchPlace(n:number){
+    this.annonce.places = n ;
     switch(n) { 
       case 1: { 
         this.class1 = "clicked";
@@ -155,7 +162,7 @@ export class ProposerPage implements OnInit {
         this.class5 = "notClicked";
         this.class6 = "notClicked";
         this.class7 = "notClicked";
-        this.numberOfPlace = 1;
+        this.annonce.places = 1;
          break; 
       } 
       case 2: { 
@@ -166,7 +173,8 @@ export class ProposerPage implements OnInit {
         this.class5 = "notClicked";
         this.class6 = "notClicked";
         this.class7 = "notClicked";
-        this.numberOfPlace = 2;         break; 
+        this.annonce.places = 2;        
+         break; 
       } 
       case 3: { 
         this.class1 = "notClicked";
@@ -176,7 +184,8 @@ export class ProposerPage implements OnInit {
         this.class5 = "notClicked";
         this.class6 = "notClicked";
         this.class7 = "notClicked";
-        this.numberOfPlace = 3;        break; 
+        this.annonce.places = 3;   
+        break; 
      } 
      case 4: { 
       this.class1 = "notClicked";
@@ -186,7 +195,8 @@ export class ProposerPage implements OnInit {
       this.class5 = "notClicked";
       this.class6 = "notClicked";
       this.class7 = "notClicked";
-      this.numberOfPlace = 4;      break; 
+      this.annonce.places = 4;      
+      break; 
      } 
      case 5: { 
       this.class1 = "notClicked";
@@ -196,7 +206,8 @@ export class ProposerPage implements OnInit {
       this.class5 = "clicked";
       this.class6 = "notClicked";
       this.class7 = "notClicked";
-      this.numberOfPlace = 5;     break; 
+      this.annonce.places = 5;     
+      break; 
      } 
      case 6: { 
       this.class1 = "notClicked";
@@ -206,7 +217,8 @@ export class ProposerPage implements OnInit {
       this.class5 = "notClicked";
       this.class6 = "clicked";
       this.class7 = "notClicked";
-      this.numberOfPlace = 6;     break; 
+      this.annonce.places = 6;     
+      break; 
      } 
      case 7: { 
       this.class1 = "notClicked";
@@ -216,7 +228,7 @@ export class ProposerPage implements OnInit {
       this.class5 = "notClicked";
       this.class6 = "notClicked";
       this.class7 = "clicked";
-      this.numberOfPlace = 7; 
+      this.annonce.places = 7; 
      break; 
     } 
    

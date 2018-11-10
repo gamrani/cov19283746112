@@ -1,27 +1,27 @@
 <div class="progress" *ngIf="areCitiesDefined()">
-        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 30%" *ngIf="areCitiesDefined()"> <span [hidden]="step2Completed()">20%</span> </div>
-        <div class="progress-bar  bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%" *ngIf="step2Completed()" > <span [hidden]="!step2Completed() || !areCitiesDefined() || step3==true">  80% </span></div>
-        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 20%"  *ngIf="confirmAnnonce()">100%</div>
+        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 30%" *ngIf="areCitiesDefined()"> </div>
+        <div class="progress-bar  bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%" *ngIf="step2Completed()" > </div>
+        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 20%"  *ngIf="annonce.prix"></div>
 </div>
 
-<form #propositionForm="ngForm">
+<form #annonceForm="ngForm">
   <!-- STEP 1 -->
     <div *ngIf="step1">
       <div class="form-group">
         <label><strong>Ville de départ :</strong></label>
-        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="city_depart" #cityDepart="ngModel"name="city_depart" required>
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="annonce.cityDepart" #cityDepart="ngModel"name="city_depart" required>
             <option *ngFor="let city of cities"  [value]="city.ville">
                 {{city.ville}}
             </option>
         </select>
       </div>
       <div class="form-check">
-            <input type="checkbox" [(ngModel)]="escale" #escaleL="ngModel" class="form-check-input" name="escale">
-            <label class="form-check-label" for="exampleCheck1"><strong>Avec escale</strong></label>
+            <input type="checkbox" [(ngModel)]="isEscale" #escaleL="ngModel" class="form-check-input" name="escale">
+            <label class="form-check-label"><strong>Avec escale</strong></label>
       </div>
-      <div class="form-group" *ngIf="escale">
+      <div class="form-group" *ngIf="isEscale">
             <label><strong>Ville d'escale : </strong></label>
-            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="city_escale" required #cityEscale="ngModel" name="city_escale">
+            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="annonce.escales" required #cityEscale="ngModel" name="city_escale">
                 <option *ngFor="let city of cities"  [value]="city.ville">
                     {{city.ville}}
                 </option>
@@ -29,7 +29,7 @@
       </div>
       <div class="form-group" >
             <label><strong>Destination :</strong> </label> 
-            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="city_destination" required #cityDestination="ngModel" name="city_destination">
+            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="annonce.cityDestination" required #cityDestination="ngModel" name="city_destination">
                     <option *ngFor="let city of cities"  [value]="city.ville" >
                             {{city.ville}}
                     </option>
@@ -38,11 +38,6 @@
       <div class="form-group alert alert-danger" *ngIf="citiesAreEquals()">
             <label><strong>Les villes doivent étre différent </strong></label> 
       </div>
-      <ion-card id="card" *ngIf="areCitiesDefined()">
-        <br><br>
-         <span style="margin-left:4%;">{{city_depart}}</span>  <span *ngIf="city_escale!=undefined && escale"><ion-icon name="arrow-round-forward"></ion-icon> {{city_escale}}</span> <span><ion-icon name="arrow-round-forward"></ion-icon> {{city_destination}}</span>
-        <br><br>
-        </ion-card>
         <button class="btn btn-success" [disabled]="!areCitiesDefined()" (click)="continue('step2')" style="width: 100%;">Suivant</button>
 
     </div>
@@ -67,8 +62,8 @@
                 <label><strong>Vous souhaitez prendre la route par :</strong>  </label>
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                       <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <button type="button" class="btn" [ngClass]="classAutoroute" (click)="chooseRoad('autoroute')">Auto-route</button> &nbsp;
-                        <button type="button" class="btn" [ngClass]="classNational" (click)="chooseRoad('national')">Route nationale</button> 
+                        <button type="button" class="btn" [ngClass]="classAutoroute" (click)="chooseRoad('Autoroute')">Auto-route</button> &nbsp;
+                        <button type="button" class="btn" [ngClass]="classNational" (click)="chooseRoad('Nationale')">Route nationale</button> 
                       </div>
                             
                 </div>
@@ -77,29 +72,29 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <label><strong>Type de votre voyage :</strong> </label>
                       <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <button type="button" class="btn" [ngClass]="classAllerSimple" (click)="chooseTripType('aller')">Aller simple</button> &nbsp;
-                        <button type="button" class="btn" [ngClass]="classAllerRetour" (click)="chooseTripType('allerRetour')">Allez - Retour</button> 
+                        <button type="button" class="btn" [ngClass]="classAllerSimple" (click)="chooseTripType('Aller simple')">Aller simple</button> &nbsp;
+                        <button type="button" class="btn" [ngClass]="classAllerRetour" (click)="chooseTripType('Aller retour')">Allez - Retour</button> 
                       </div>
                             
                 </div>
         </div>
-        <div class="form-group" *ngIf="tripType!=undefined">
+        <div class="form-group" *ngIf="annonce.typeVoyage!=undefined">
                     <div>
                         <label><strong>Date de départ : </strong><small>DD/MM/YYYY HH:MM:SS</small></label> 
                     </div>
                     <div>
-                            <input class="form-control" type="datetime-local" [(ngModel)]="date_aller" name="date_aller" class="datetime-local-input">
+                            <input class="form-control" type="datetime-local" [(ngModel)]="annonce.dateDepart" name="date_aller" class="datetime-local-input">
                     </div>     
-                    <div *ngIf="tripType == 'allerRetour'">
+                    <div *ngIf="annonce.typeVoyage == 'Aller retour'">
                         <label><strong>Date d'arrivée :</strong><small>DD/MM/YYYY HH:MM:SS</small></label> 
                       <div>
-                            <input class="form-control" type="datetime-local" [(ngModel)]="date_retour"  name="date_retour" class="datetime-local-input">
+                            <input class="form-control" type="datetime-local" [(ngModel)]="annonce.dateArrivee"  name="date_retour" class="datetime-local-input">
                       </div> 
                     </div>
                     <br>
                     <div class="form-group alert alert-danger" *ngIf="dateNotValid">
-                       <strong *ngIf="tripType=='aller'">La date n'est pas valide</strong>
-                       <strong *ngIf="tripType=='allerRetour'">Las dates ne sont pas valide</strong>
+                       <strong *ngIf="tripType=='Aller simple'">La date n'est pas valide</strong>
+                       <strong *ngIf="tripType=='Aller retour'">Las dates ne sont pas valide</strong>
                     </div>         
         </div>
         <button class="btn btn-success" [disabled]="!step2Completed()" (click)="continue('step3')" style="width: 100%;">Suivant</button>   
@@ -107,6 +102,57 @@
      <!-- STEP 3 -->
 
      <div *ngIf="step3">
-       STEP3
-     </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Prix</span>
+        </div>
+        <input type="number" class="form-control" name="prix" max="9999" #price="ngModel" [(ngModel)]="annonce.prix" required>
+        <div class="input-group-append">
+          <span class="input-group-text">DH / PERSONNE</span>
+        </div>
+      </div>
+      <ion-card> 
+          <ion-card-content>
+            <ion-card-title>
+            </ion-card-title>
+              
+             <div>
+                <i class="fas fa-calendar-alt colorIcon"></i> {{annonce.dateDepart | date:'shortDate'}}
+                <i class="far fa-clock colorIcon"></i> {{annonce.dateDepart | date:'shortTime' }} <br>
+                <i class="fas fa-arrow-alt-circle-down colorIconDepart"></i> {{annonce.cityDepart}}
+             </div> 
+              <div>
+                <i class="fas fa-ellipsis-v betweenCities colorIcon"  ></i><br>
+                <i class="fas fa-ellipsis-v betweenCities colorIcon"  ></i> 
+              </div>
+              <div *ngIf="annonce.escales">
+                <div>
+                  <i class="far fa-circle colorIcon"></i> {{annonce.escales}}
+                </div>
+                <div>
+                  <i class="fas fa-ellipsis-v betweenCities colorIcon"  ></i>
+                 </div>
+                 <div>
+                    <i class="fas fa-ellipsis-v betweenCities colorIcon"></i>
+                </div>
+              </div>
+              <div>
+                  <i class="fas fa-circle colorIconDestination" ></i> {{annonce.cityDestination}}
+              </div> <br>
+              <div>
+                  <span class="places"><i class="fas fa-car"></i> {{annonce.typeVoyage}} </span>
+                 <span class="price" *ngIf="annonce.prix"><i class="fas fa-money-check-alt"></i> <span> {{annonce.prix}} DH</span> </span>
+              </div>
+              <div>
+                  <span class="places"><i class="fas fa-road"></i> {{annonce.typeRoute}} </span>
+              </div>
+              <div>
+                  <span class="places"><i class="fas fa-users"></i> {{annonce.places}} place(s) disponible(s) </span>  
+              </div>
+             <div style="margin-top:10%">
+                <button class="btn btn-primary btn-lg btn-block"  [disabled]= "!annonce.prix" (click)="valider()" ion-button full>Publier</button>
+             </div>
+          </ion-card-content>
+        </ion-card>
+    </div>
 </form>
