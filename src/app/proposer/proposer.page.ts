@@ -46,9 +46,7 @@ export class ProposerPage implements OnInit {
     this.annonce.dateArrivee = this.dateTimeService.parseDateToStringWithFormat(new Date());
     this.hours = Array(23).fill(0).map((x,i)=>i);
     try {
-      this.citiesService.getJSon().subscribe(result => {
-        this.cities = result;
-      });
+      this.cities=this.annonce.cities;
     } catch (e) {
       console.log("Profile" + e);
     }
