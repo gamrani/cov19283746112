@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import {ProposerPage} from '../proposer/proposer.page';
+import { AnnoncesPage } from '../annonces/annonces.page';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import {ProposerPage} from '../proposer/proposer.page';
       }
     ])
   ],
-  declarations: [HomePage,ProposerPage]
+  declarations: [HomePage,ProposerPage,AnnoncesPage]
 })
 export class HomePageModule {}

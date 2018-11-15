@@ -3,6 +3,8 @@ import {CitiesService} from '../services/cities.service';
 import {DateTimeService} from '../services/date-time.service';
 import {Constant} from './constants';
 import {Annonce} from '../../models/Annonce';
+import { AlertController } from '@ionic/angular';
+import { TripService } from '../services/trip.service';
 
 @Component({
   selector: 'app-proposer',
@@ -36,7 +38,7 @@ export class ProposerPage implements OnInit {
 
   hours ;
 
-  constructor(private citiesService : CitiesService,private dateTimeService:DateTimeService) {
+  constructor(private citiesService : CitiesService,private tripService : TripService,private dateTimeService:DateTimeService,private alertCtrl: AlertController) {
     this.annonce.places = 0;
     this.annonce.typeVoyage ="Aller simple";
     this.annonce.typeRoute = "Autoroute";
@@ -66,7 +68,17 @@ export class ProposerPage implements OnInit {
     return false;
   }
   valider(){
-    alert(JSON.stringify(this.annonce));
+
+    //alert(JSON.stringify(this.annonce));
+      this.tripService.saveTrip(this.annonce).subscribe(
+        data => {
+          if(data == null){  
+            alert("error"); 
+          } else{
+            alert("success");
+          }
+        }
+      );;
   }
   chooseTripType(type:string){
     this.annonce.typeVoyage = type;
@@ -98,7 +110,7 @@ export class ProposerPage implements OnInit {
     }
   }
   areCitiesDefined():boolean{
-    if(this.annonce.cityDestination == undefined || this.annonce.cityDepart == undefined || (this.annonce.escales == undefined && this.isEscale) || this.citiesAreEquals())
+    if(this.annonce.cityDestination == undefined || this.annonce.cityDepart == undefined || (this.annonce.escale == undefined && this.isEscale) || this.citiesAreEquals())
     {
       return false;
     }
@@ -112,10 +124,10 @@ export class ProposerPage implements OnInit {
         return true;
       }
       if(this.isEscale){
-        if(this.annonce.cityDestination == this.annonce.escales){
+        if(this.annonce.cityDestination == this.annonce.escale){
           return true;
         }
-        if(this.annonce.cityDepart == this.annonce.escales){
+        if(this.annonce.cityDepart == this.annonce.escale){
           return true;
         }
       }

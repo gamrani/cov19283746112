@@ -7,5 +7,5 @@ import com.api.Api.models.Ville;
 
 @Repository
 public interface CitiesRepository extends JpaRepository<Ville, Long> {
-
+   public Ville findByVille(String ville);
 }

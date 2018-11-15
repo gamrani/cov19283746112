@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {User} from '../../models/User';
 import { Observable } from 'rxjs';
+import {Config} from '../../server.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,8 +15,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RegistrationService {
-  apiUrl = "http://localhost:8080/users/sign-up";
-  constructor(private http: HttpClient) { }
+  apiUrl = this.config.uriLocal;
+  constructor(private http: HttpClient,private config:Config) { }
 
   // user registration
   registration(user : User) : Observable<User>{  

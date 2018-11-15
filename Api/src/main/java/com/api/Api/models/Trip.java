@@ -18,6 +18,15 @@ public class Trip implements Serializable {
 	@Column(name="date_depart")
 	private Date dateDepart;
 	
+	@Column(name="number_of_places")
+	private int places;
+	
+	@Column(name="type_voyage")
+	private String typeVoyage;
+	
+	@Column(name="type_route")
+	private String typeRoute;
+	
 	@Column(name="date_arrivee")
 	private Date dateArrivee;
 	
@@ -30,27 +39,27 @@ public class Trip implements Serializable {
 	@OneToMany
 	private List<Utilisateur> adherents;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
 	private Utilisateur createur;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
 	private Ville cityDepart;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
 	private Ville cityDestination;
 
-	@OneToMany
-	private Collection<Ville> esclaes;
+	@OneToOne
+	private Ville escale;
 
 	public Trip(Long id, List<Utilisateur> adherents, Utilisateur createur, Ville cityDepart,
-			Ville cityDestination, Collection<Ville> esclaes, String commentaire, Long prix) {
+			Ville cityDestination, Ville escale, String commentaire, Long prix) {
 		super();
 		this.id = id;
 		this.adherents = adherents;
 		this.createur = createur;
 		this.cityDepart = cityDepart;
 		this.cityDestination = cityDestination;
-		this.esclaes = esclaes;
+		this.escale = escale;
 		this.commentaire = commentaire;
 		this.prix = prix;
 	}
@@ -99,14 +108,6 @@ public class Trip implements Serializable {
 		this.cityDestination = cityDestination;
 	}
 
-	public Collection<Ville> getEsclaes() {
-		return esclaes;
-	}
-
-	public void setEsclaes(Collection<Ville> esclaes) {
-		this.esclaes = esclaes;
-	}
-
 	public String getCommentaire() {
 		return commentaire;
 	}
@@ -122,5 +123,54 @@ public class Trip implements Serializable {
 	public void setPrix(Long prix) {
 		this.prix = prix;
 	}
+
+	public Date getDateDepart() {
+		return dateDepart;
+	}
+
+	public void setDateDepart(Date dateDepart) {
+		this.dateDepart = dateDepart;
+	}
+
+	public int getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(int places) {
+		this.places = places;
+	}
+
+	public String getTypeVoyage() {
+		return typeVoyage;
+	}
+
+	public void setTypeVoyage(String typeVoyage) {
+		this.typeVoyage = typeVoyage;
+	}
+
+	public String getTypeRoute() {
+		return typeRoute;
+	}
+
+	public void setTypeRoute(String typeRoute) {
+		this.typeRoute = typeRoute;
+	}
+
+	public Date getDateArrivee() {
+		return dateArrivee;
+	}
+
+	public void setDateArrivee(Date dateArrivee) {
+		this.dateArrivee = dateArrivee;
+	}
+
+	public Ville getEscale() {
+		return escale;
+	}
+
+	public void setEscale(Ville escale) {
+		this.escale = escale;
+	}
+	
 
 }

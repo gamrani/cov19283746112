@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.Api.models.Trip;
 import com.api.Api.services.TripServices;
+import com.api.Api.services.TripServicesImplementation;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/trip")
@@ -23,7 +26,14 @@ public class TripController {
 	
 	@PostMapping("/create")
 	public Trip createTrip(@RequestBody Trip trip) {
-		return service.setTrip(trip);
+		
+		try {
+			return service.setTrip(trip);
+		} catch (Exception e) {
+			System.out.println("controller error :"+e.getMessage());
+			return null;
+		}
+		
 	}
 	
 	@GetMapping("/allTrips")

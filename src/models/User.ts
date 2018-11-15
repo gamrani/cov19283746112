@@ -7,5 +7,14 @@ export class User {
   public passwordConf : string;
   public sexe: string ;
   public birthday : Date;
-    constructor(){}
+    constructor(){
+      this.firstName = "EL GAMRANI";
+      this.lastName = "Youssef";
+      this.email = "gamraniyoussef@gmail.com";
+      this.phone = 0;
+      this.password = "abc";
+      this.sexe = "homme";
+      this.birthday = new Date();
+    }
+   
   }

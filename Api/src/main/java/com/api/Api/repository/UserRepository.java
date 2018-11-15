@@ -19,6 +19,7 @@ public interface UserRepository extends JpaRepository<Utilisateur,Long> {
      public Utilisateur findByPhone(Long phone);
      public Utilisateur findByPassword(String password);
      public Utilisateur findByEmailOrPhone(String email, Long phone);
+     
      @Transactional
      @Modifying
      @Query("update Utilisateur u set u.token = :token where u.id = :id")

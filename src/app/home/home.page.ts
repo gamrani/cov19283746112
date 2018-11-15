@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class HomePage {
   proposer : boolean = false;
   chercher : boolean = false;
-  demander : boolean = false;
+  demander : boolean = true;
   profil : boolean = false;
   constructor(private router: Router) { }
   loginForm(){
@@ -22,12 +22,7 @@ export class HomePage {
     this.demander = false;
     this.profil = false;
   }
-  onClickChercher(){
-    this.proposer = false;
-    this.chercher = true;
-    this.demander = false;
-    this.profil = false;
-  }
+ 
   onClickDemander(){
     this.proposer = false;
     this.chercher = false;

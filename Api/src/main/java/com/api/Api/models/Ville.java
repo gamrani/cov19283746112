@@ -22,14 +22,11 @@ public class Ville implements Serializable{
 	private Long id;
 	@Column
 	private String ville;
-	@Column
-	private Long region;
 	
-	public Ville(Long id, String ville, Long region) {
+	
+	public Ville(String ville) {
 		super();
-		this.id = id;
 		this.ville = ville;
-		this.region = region;
 	}
 	public Ville() {
 		super();
@@ -46,16 +43,6 @@ public class Ville implements Serializable{
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-	public Long getRegion() {
-		return region;
-	}
-	public void setRegion(Long region) {
-		this.region = region;
-	}
-	
-
-	
-
 	
 	
 }

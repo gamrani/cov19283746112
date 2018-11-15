@@ -63,6 +63,10 @@ public class Utilisateur implements Serializable{
 		this.sexe = sexe;
 	}
 	
+	public Utilisateur(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getToken() {
 		return token;
 	}

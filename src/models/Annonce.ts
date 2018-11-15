@@ -2,12 +2,11 @@ import {User} from './User';
 import { City } from './City';
 
 export class Annonce {
-      public prix : number;
       public commentaire : string;
       public createur : User;
       public cityDepart : string; 
       public cityDestination: string; 
-      public escales : string ; 
+      public escale : string ; 
       public dateDepart : string; 
       public dateArrivee : string;
       public places : number;
@@ -19,712 +18,468 @@ export class Annonce {
         this.cities = [
             {
                 "id": 1,
-                "ville": "Aïn Harrouda",
-                "region": 1
+                "ville": "Aïn Harrouda"
             },
                       {
                 "id": 3,
-                "ville": "Bouskoura",
-                "region": 1
+                "ville": "Bouskoura"
             },
             {
                 "id": 4,
-                "ville": "Casablanca",
-                "region": 1
+                "ville": "Casablanca"
             },
             {
                 "id": 5,
-                "ville": "Médiouna",
-                "region": 1
+                "ville": "Médiouna"
             },
             {
                 "id": 6,
-                "ville": "Mohammédia",
-                "region": 1
+                "ville": "Mohammédia"
             },
             {
                 "id": 7,
-                "ville": "Tit Mellil",
-                "region": 1
+                "ville": "Tit Mellil"
             },
             {
                 "id": 9,
-                "ville": "Bejaâd",
-                "region": 2
+                "ville": "Bejaâd"
             },
             {
                 "id": 10,
-                "ville": "Ben Ahmed",
-                "region": 2
+                "ville": "Ben Ahmed"
             },
             {
                 "id": 11,
-                "ville": "Benslimane",
-                "region": 2
+                "ville": "Benslimane"
             },
             {
                 "id": 12,
-                "ville": "Berrechid",
-                "region": 2
+                "ville": "Berrechid"
             },
             {
                 "id": 13,
-                "ville": "Boujniba",
-                "region": 2
+                "ville": "Boujniba"
             },
            
             {
                 "id": 15,
-                "ville": "Bouznika",
-                "region": 2
+                "ville": "Bouznika"
             },
             {
                 "id": 16,
-                "ville": "Deroua",
-                "region": 2
-            },
+                "ville": "Deroua"            },
             {
                 "id": 17,
-                "ville": "El Borouj",
-                "region": 2
-            },
+                "ville": "El Borouj"            },
             {
                 "id": 18,
-                "ville": "El Gara",
-                "region": 2
-            },
+                "ville": "El Gara"            },
             {
                 "id": 19,
-                "ville": "Guisser",
-                "region": 2
-            },
+                "ville": "Guisser"            },
             
             {
                 "id": 21,
-                "ville": "Khouribga",
-                "region": 2
-            },
+                "ville": "Khouribga"            },
            
             {
                 "id": 23,
-                "ville": "Oued Zem",
-                "region": 2
-            },
+                "ville": "Oued Zem"            },
     
           
             {
                 "id": 29,
-                "ville": "Ras El Aïn",
-                "region": 2
-            },
+                "ville": "Ras El Aïn"            },
             {
                 "id": 30,
-                "ville": "Settat",
-                "region": 2
-            },
+                "ville": "Settat"            },
             {
                 "id": 31,
-                "ville": "Sidi Rahhal Chataï",
-                "region": 2
-            },
+                "ville": "Sidi Rahhal Chataï"            },
             {
                 "id": 32,
-                "ville": "Soualem",
-                "region": 2
-            },
+                "ville": "Soualem"            },
             {
                 "id": 33,
-                "ville": "Azemmour",
-                "region": 3
-            },
+                "ville": "Azemmour"            },
           
            
             {
                 "id": 37,
-                "ville": "El Jadida",
-                "region": 3
-            },
+                "ville": "El Jadida"            },
             
            
             {
                 "id": 41,
-                "ville": "Jorf Lasfar",
-                "region": 3
-            },
+                "ville": "Jorf Lasfar"            },
             {
                 "id": 42,
-                "ville": "Khemis Zemamra",
-                "region": 3
-            },
+                "ville": "Khemis Zemamra"            },
             {
                 "id": 43,
-                "ville": "Laaounate",
-                "region": 3
-            },
+                "ville": "Laaounate"            },
             {
                 "id": 44,
-                "ville": "Moulay Abdallah",
-                "region": 3
-            },
+                "ville": "Moulay Abdallah"            },
             {
                 "id": 45,
-                "ville": "Oualidia",
-                "region": 3
-            },
+                "ville": "Oualidia"            },
            
             {
                 "id": 49,
-                "ville": "Safi",
-                "region": 3
-            },
+                "ville": "Safi"            },
           
             {
                 "id": 51,
-                "ville": "Sebt Gzoula",
-                "region": 3
-            },
+                "ville": "Sebt Gzoula"            },
             {
                 "id": 52,
-                "ville": "Sidi Ahmed",
-                "region": 3
-            },
+                "ville": "Sidi Ahmed"            },
            
             {
                 "id": 54,
-                "ville": "Sidi Bennour",
-                "region": 3
-            },
+                "ville": "Sidi Bennour"            },
             {
                 "id": 55,
-                "ville": "Sidi Bouzid",
-                "region": 3
-            },
+                "ville": "Sidi Bouzid"            },
           
             {
                 "id": 57,
-                "ville": "Youssoufia",
-                "region": 3
-            },
+                "ville": "Youssoufia"            },
             {
                 "id": 58,
-                "ville": "Fès",
-                "region": 4
-            },
+                "ville": "Fès"            },
           
             {
                 "id": 64,
-                "ville": "Imouzzer",
-                "region": 4
-            },
+                "ville": "Imouzzer"            },
           
             {
                 "id": 67,
-                "ville": "Moulay Yaâcoub",
-                "region": 4
-            },
+                "ville": "Moulay Yaâcoub"            },
             
             
             {
                 "id": 71,
-                "ville": "Séfrou",
-                "region": 4
-            },
+                "ville": "Séfrou"            },
             {
                 "id": 72,
-                "ville": "Skhirate",
-                "region": 4
-            },
+                "ville": "Skhirate"            },
      
             {
                 "id": 79,
-                "ville": "Kénitra",
-                "region": 5
-            },
+                "ville": "Kénitra"            },
             
             {
                 "id": 83,
-                "ville": "Mehdia",
-                "region": 5
-            },
+                "ville": "Mehdia"            },
             {
                 "id": 84,
-                "ville": "Moulay Bousselham",
-                "region": 5
-            },
+                "ville": "Moulay Bousselham"            },
             {
                 "id": 85,
-                "ville": "Sidi Allal Tazi",
-                "region": 5
-            },
+                "ville": "Sidi Allal Tazi"            },
             {
                 "id": 86,
-                "ville": "Sidi Kacem",
-                "region": 5
-            },
+                "ville": "Sidi Kacem"            },
             {
                 "id": 87,
-                "ville": "Sidi Slimane",
-                "region": 5
-            },
+                "ville": "Sidi Slimane"            },
             {
                 "id": 88,
-                "ville": "Sidi Taibi",
-                "region": 5
-            },
+                "ville": "Sidi Taibi"            },
             {
                 "id": 89,
-                "ville": "Sidi Yahya El Gharb",
-                "region": 5
-            },
+                "ville": "Sidi Yahya El Gharb"            },
             {
                 "id": 90,
-                "ville": "Souk El Arbaa",
-                "region": 5
-            },
+                "ville": "Souk El Arbaa"            },
            
             {
                 "id": 95,
-                "ville": "Es-Semara",
-                "region": 6
-            },
+                "ville": "Es-Semara"            },
            
             {
                 "id": 98,
-                "ville": "Guelmim",
-                "region": 6
-            },
+                "ville": "Guelmim"            },
             
             {
                 "id": 100,
-                "ville": "Tan-Tan",
-                "region": 6
-            },
+                "ville": "Tan-Tan"            },
            
             {
                 "id": 103,
-                "ville": "Marrakech",
-                "region": 7
-            },
+                "ville": "Marrakech"            },
            
             {
                 "id": 118,
-                "ville": "Ben Guerir",
-                "region": 7
-            },
+                "ville": "Ben Guerir"            },
             {
                 "id": 119,
-                "ville": "Chichaoua",
-                "region": 7
-            },
+                "ville": "Chichaoua"            },
            
             {
                 "id": 121,
-                "ville": "El Kelaâ des Sraghna",
-                "region": 7
-            },
+                "ville": "El Kelaâ des Sraghna"            },
             {
                 "id": 122,
-                "ville": "Essaouira",
-                "region": 7
-            },
+                "ville": "Essaouira"            },
            
             {
                 "id": 138,
-                "ville": "Sidi Rahhal",
-                "region": 7
-            },
+                "ville": "Sidi Rahhal"            },
             
             {
                 "id": 150,
-                "ville": "Meknès\u200e",
-                "region": 8
-            },
+                "ville": "Meknès\u200e"            },
             {
                 "id": 151,
-                "ville": "Khénifra",
-                "region": 8
-            },
+                "ville": "Khénifra"            },
            
             {
                 "id": 158,
-                "ville": "Arfoud",
-                "region": 8
-            },
+                "ville": "Arfoud"            },
             {
                 "id": 159,
-                "ville": "Azrou",
-                "region": 8
-            },
+                "ville": "Azrou"            },
            
             {
                 "id": 171,
-                "ville": "Errachidia",
-                "region": 8
-            },
+                "ville": "Errachidia"            },
     
             {
                 "id": 177,
-                "ville": "Ifrane",
-                "region": 8
-            },
+                "ville": "Ifrane"            },
            
             {
                 "id": 179,
-                "ville": "Jorf",
-                "region": 8
-            },
+                "ville": "Jorf"            },
           
             {
                 "id": 183,
-                "ville": "M'rirt",
-                "region": 8
-            },
+                "ville": "M'rirt"            },
             {
                 "id": 184,
-                "ville": "Midelt",
-                "region": 8
-            },
+                "ville": "Midelt"            },
            
             {
                 "id": 186,
-                "ville": "Moulay Bouazza",
-                "region": 8
-            },
+                "ville": "Moulay Bouazza"            },
        
             {
                 "id": 211,
-                "ville": "Berkane",
-                "region": 9
-            },
+                "ville": "Berkane"            },
            
             {
                 "id": 225,
-                "ville": "Figuig",
-                "region": 9
-            },
+                "ville": "Figuig"            },
            
             {
                 "id": 228,
-                "ville": "Jerada",
-                "region": 9
-            },
+                "ville": "Jerada"            },
           
             {
                 "id": 235,
-                "ville": "Nador",
-                "region": 9
-            },
+                "ville": "Nador"            },
            
             {
                 "id": 238,
-                "ville": "Oujda",
-                "region": 9
-            },
+                "ville": "Oujda"            },
             {
                 "id": 239,
-                "ville": "Ras El Ma",
-                "region": 9
-            },
+                "ville": "Ras El Ma"            },
             {
                 "id": 240,
-                "ville": "Saïdia",
-                "region": 9
-            },
+                "ville": "Saïdia"            },
            
             {
                 "id": 245,
-                "ville": "Taourirt",
-                "region": 9
-            },
+                "ville": "Taourirt"            },
            
           
             {
                 "id": 252,
-                "ville": "Rabat",
-                "region": 10
-            },
+                "ville": "Rabat"            },
             {
                 "id": 253,
-                "ville": "Salé",
-                "region": 10
-            },
+                "ville": "Salé"            },
             {
                 "id": 254,
-                "ville": "Ain El Aouda",
-                "region": 10
-            },
+                "ville": "Ain El Aouda"            },
             {
                 "id": 255,
-                "ville": "Harhoura",
-                "region": 10
-            },
+                "ville": "Harhoura"            },
             {
                 "id": 256,
-                "ville": "Khémisset",
-                "region": 10
-            },
+                "ville": "Khémisset"            },
             {
                 "id": 257,
-                "ville": "Oulmès",
-                "region": 10
-            },
+                "ville": "Oulmès"            },
             {
                 "id": 258,
-                "ville": "Rommani",
-                "region": 10
-            },
+                "ville": "Rommani"            },
         
             {
                 "id": 260,
-                "ville": "Sidi Bouknadel",
-                "region": 10
-            },
+                "ville": "Sidi Bouknadel"            },
             {
                 "id": 261,
-                "ville": "Skhirat",
-                "region": 10
-            },
+                "ville": "Skhirat"            },
             {
                 "id": 262,
-                "ville": "Tamesna",
-                "region": 10
-            },
+                "ville": "Tamesna"            },
             {
                 "id": 263,
-                "ville": "Témara",
-                "region": 10
-            },
+                "ville": "Témara"            },
            
             {
                 "id": 265,
-                "ville": "Tiflet",
-                "region": 10
-            },
+                "ville": "Tiflet"            },
             {
                 "id": 266,
-                "ville": "Touarga",
-                "region": 10
-            },
+                "ville": "Touarga"            },
             {
                 "id": 267,
-                "ville": "Agadir",
-                "region": 11
-            },
+                "ville": "Agadir"            },
            
             {
                 "id": 270,
-                "ville": "Aït Melloul",
-                "region": 11
-            },
+                "ville": "Aït Melloul"            },
            
             {
                 "id": 291,
-                "ville": "Inezgane",
-                "region": 11
-            },
+                "ville": "Inezgane"            },
            
             {
                 "id": 293,
-                "ville": "Kelaat-M'Gouna",
-                "region": 11
-            },
+                "ville": "Kelaat-M'Gouna"            },
            
             {
                 "id": 300,
-                "ville": "Ouarzazate",
-                "region": 11
-            },
+                "ville": "Ouarzazate"            },
            
             {
                 "id": 304,
-                "ville": "Sidi Ifni",
-                "region": 11
-            },
+                "ville": "Sidi Ifni"            },
            
             {
                 "id": 307,
-                "ville": "Tafraout",
-                "region": 11
-            },
+                "ville": "Tafraout"            },
             {
                 "id": 308,
-                "ville": "Taghzout",
-                "region": 11
-            },
+                "ville": "Taghzout"            },
             
             {
                 "id": 319,
-                "ville": "Tiznit",
-                "region": 11
-            },
+                "ville": "Tiznit"            },
            
             {
                 "id": 321,
-                "ville": "Zagora",
-                "region": 11
-            },
+                "ville": "Zagora"            },
           
             {
                 "id": 324,
-                "ville": "Azilal",
-                "region": 12
-            },
+                "ville": "Azilal"            },
         
             {
                 "id": 327,
-                "ville": "Béni Mellal",
-                "region": 12
-            },
+                "ville": "Béni Mellal"            },
             {
                 "id": 328,
-                "ville": "Bin elouidane",
-                "region": 12
-            },
+                "ville": "Bin elouidane"            },
            
             {
                 "id": 332,
-                "ville": "Demnate",
-                "region": 12
-            },
+                "ville": "Demnate"            },
             
             {
                 "id": 334,
-                "ville": "El Ksiba",
-                "region": 12
-            },
+                "ville": "El Ksiba"            },
            
             {
                 "id": 336,
-                "ville": "Fquih Ben Salah",
-                "region": 12
-            },
+                "ville": "Fquih Ben Salah"            },
             {
                 "id": 337,
-                "ville": "Kasba Tadla",
-                "region": 12
-            },
+                "ville": "Kasba Tadla"            },
           
             {
                 "id": 343,
-                "ville": "Souk Sebt Oulad Nemma",
-                "region": 12
-            },
+                "ville": "Souk Sebt Oulad Nemma"            },
             {
                 "id": 344,
-                "ville": "Zaouïat Cheikh",
-                "region": 12
-            },
+                "ville": "Zaouïat Cheikh"            },
             {
                 "id": 345,
-                "ville": "Tanger\u200e",
-                "region": 13
-            },
+                "ville": "Tanger\u200e"            },
             {
                 "id": 346,
-                "ville": "Tétouan\u200e",
-                "region": 13
-            },
+                "ville": "Tétouan\u200e"            },
             {
                 "id": 347,
-                "ville": "Akchour",
-                "region": 13
-            },
+                "ville": "Akchour"            },
             {
                 "id": 348,
-                "ville": "Assilah",
-                "region": 13
-            },
+                "ville": "Assilah"            },
           
             {
                 "id": 352,
-                "ville": "Chefchaouen",
-                "region": 13
-            },
+                "ville": "Chefchaouen"            },
           
             {
                 "id": 355,
-                "ville": "Fnideq",
-                "region": 13
-            },
+                "ville": "Fnideq"            },
           
             {
                 "id": 357,
-                "ville": "Jebha",
-                "region": 13
-            },
+                "ville": "Jebha"            },
           
             {
                 "id": 360,
-                "ville": "Ksar El Kébir",
-                "region": 13
-            },
+                "ville": "Ksar El Kébir"            },
             {
                 "id": 361,
-                "ville": "Larache",
-                "region": 13
-            },
+                "ville": "Larache"            },
             {
                 "id": 362,
-                "ville": "M'diq",
-                "region": 13
-            },
+                "ville": "M'diq"            },
             {
                 "id": 363,
-                "ville": "Martil",
-                "region": 13
-            },
+                "ville": "Martil"            },
            
             {
                 "id": 365,
-                "ville": "Oued Laou",
-                "region": 13
-            },
+                "ville": "Oued Laou"            },
            
             {
                 "id": 367,
-                "ville": "Ouezzane",
-                "region": 13
-            },
+                "ville": "Ouezzane"            },
                      {
                 "id": 374,
-                "ville": "Al Hoceïma\u200e",
-                "region": 14
-            },
+                "ville": "Al Hoceïma\u200e"            },
            
            
             {
                 "id": 379,
-                "ville": "Guercif\u200e",
-                "region": 14
-            },
+                "ville": "Guercif\u200e"            },
            
             {
                 "id": 397,
-                "ville": "Laayoune\u200e",
-                "region": 15
-            },
+                "ville": "Laayoune\u200e"            },
          
             {
                 "id": 399,
-                "ville": "Tarfaya\u200e",
-                "region": 15
-            },
+                "ville": "Tarfaya\u200e"            },
             {
                 "id": 400,
-                "ville": "Boujdour\u200e",
-                "region": 15
-            },
+                "ville": "Boujdour\u200e"            },
         
             {
                 "id": 402,
-                "ville": "Oued-Eddahab ",
-                "region": 16
-            },
+                "ville": "Oued-Eddahab "            },
             {
                 "id": 403,
-                "ville": "Stehat",
-                "region": 13
-            }
+                "ville": "Stehat"            }
         ];
       }
     }
