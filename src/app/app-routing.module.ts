@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'Registration', loadChildren: './registration/registration.module#RegistrationPageModule' },
   { path: 'authentification', loadChildren: './authentification/authentification.module#AuthentificationPageModule' },
   { path: 'proposer', loadChildren: './proposer/proposer.module#ProposerPageModule' },
-  { path: 'annonces', loadChildren: './annonces/annonces.module#AnnoncesPageModule' }
+  { path: 'annonces', loadChildren: './annonces/annonces.module#AnnoncesPageModule' },  { path: 'reservation', loadChildren: './reservation/reservation.module#ReservationPageModule' }
+
 
 
 ];

@@ -1,5 +1,6 @@
 package com.api.Api.controller;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.Api.models.Utilisateur;
-import com.api.Api.security.JwtAuthenticationResponse;
 import com.api.Api.security.JwtTokenProvider;
-import com.api.Api.security.UserPrincipal;
 import com.api.Api.services.UsersServices;
 
 @RestController
@@ -38,14 +37,17 @@ public class UsersController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
 
 	@Autowired
 	private JwtTokenProvider tokenProvider;
 
 	private int phone;
-
+	
+	@RequestMapping("/user")
+	public Principal user(Principal principal) {
+		return principal;
+	}
+	
 	/** Sign up **/
 	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
 	public Utilisateur registration(@RequestBody Utilisateur utilisateur) {
