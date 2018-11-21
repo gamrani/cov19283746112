@@ -69,7 +69,7 @@ export class ProposerPage implements OnInit {
   }
   valider(){
 
-    //alert(JSON.stringify(this.annonce));
+     alert(this.annonce.dateDepart);
       this.tripService.saveTrip(this.annonce).subscribe(
         data => {
           if(data == null){  

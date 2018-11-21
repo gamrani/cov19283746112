@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import {User} from '../../models/User';
 import {RegistrationService} from '../services/registration.service';
 import { Services } from '@angular/core/src/view';
+import { HttpClientModule } from '@angular/common/http'; 
+import { HttpModule } from '@angular/http';
 
 @Component({
   selector: 'app-registration',

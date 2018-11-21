@@ -1,10 +1,12 @@
 package com.api.Api.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +41,22 @@ public class TripController {
 	@GetMapping("/allTrips")
 	public List<Trip> getAllTrips(){
 		return service.getAllTrips();
+	}
+	
+	@GetMapping("/trips/{cityDepart}/{cityDestionation}/{dateDepart}")
+	public List<Trip> getTrips(@PathVariable("cityDepart") String cityDepart,
+			@PathVariable("cityDestionation") String cityDestionation,
+			@PathVariable("dateDepart") String dateDepart){
+		 
+		return service.getTrips(cityDepart, cityDestionation, dateDepart);
+		
+	}
+	@GetMapping("/trips/{cityDepart}/{cityDestionation}")
+	public List<Trip> getTripsByCities(@PathVariable("cityDepart") String cityDepart,
+			@PathVariable("cityDestionation") String cityDestionation){
+		 
+		return service.getTripsByCities(cityDepart, cityDestionation);
+		
 	}
 	
 }

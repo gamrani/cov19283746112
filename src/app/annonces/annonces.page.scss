@@ -60,6 +60,7 @@ img{
 .reserverButton{
    float:right;
 }
+
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -69,5 +70,15 @@ img{
     line-height: 1.428571429;
     border-radius: 15px;
   }
-   
+  .searchbar-input-container {
+    .searchbar-clear-icon {
+       background-image: none;
+    }
+ 
+    .searchbar-clear-icon:before {
+       font-family: "Ionicons";
+       content: "\f2bf";
+       color: blue;
+    }
+ }
   

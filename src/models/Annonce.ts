@@ -7,7 +7,8 @@ export class Annonce {
       public cityDepart : string; 
       public cityDestination: string; 
       public escale : string ; 
-      public dateDepart : string; 
+      public dateDepart : string;
+      public shortDateDepart : string;
       public dateArrivee : string;
       public places : number;
       public typeRoute : string;
@@ -481,5 +482,10 @@ export class Annonce {
                 "id": 403,
                 "ville": "Stehat"            }
         ];
-      }
+        this.cities.sort((a, b) => {
+            if (a.ville < b.ville) return -1;
+            else if (a.ville > b.ville) return 1;
+            else return 0;
+          });  
+    }
     }

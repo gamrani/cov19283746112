@@ -18,6 +18,9 @@ public class Trip implements Serializable {
 	@Column(name="date_depart")
 	private Date dateDepart;
 	
+	@Column(name="short_date_depart")
+	private String shortDateDepart;
+	
 	@Column(name="number_of_places")
 	private int places;
 	
@@ -94,6 +97,15 @@ public class Trip implements Serializable {
 
 	public Ville getCityDepart() {
 		return cityDepart;
+	}
+    
+	
+	public String getShortDateDepart() {
+		return shortDateDepart;
+	}
+
+	public void setShortDateDepart(String shortDateDepart) {
+		this.shortDateDepart = shortDateDepart;
 	}
 
 	public void setCityDepart(Ville cityDepart) {

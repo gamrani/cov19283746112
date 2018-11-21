@@ -1,5 +1,6 @@
 package com.api.Api.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class TripServicesImplementation implements TripServices {
     	   Ville escale = cityRepository.findByVille(trip.getEscale().getVille());
         trip.setEscale(escale);
         }
-        
+       
 		return dao.save(trip);
 	}catch(Exception e) {
 		System.out.println("Service error : "+e);
@@ -53,6 +54,31 @@ public class TripServicesImplementation implements TripServices {
 	
 	public List<Trip> getAllTrips() {
 		return dao.findAll();
+	}
+
+	@Override
+	public List<Trip> getTrips(String cityDepart, String cityDestionation, String dateDepart) {
+		// TODO Auto-generated method stub
+		try {
+			Ville depart = cityRepository.findByVille(cityDepart);
+			Ville destionation = cityRepository.findByVille(cityDestionation);
+			return dao.getTrips(depart, destionation, dateDepart);
+		}catch(Exception e) {
+			System.out.println("error get trips by cities and date : "+e.getMessage());
+			return null;
+		}	
+	}
+
+	@Override
+	public List<Trip> getTripsByCities(String cityDepart, String cityDestionation) {
+		try {
+			Ville depart = cityRepository.findByVille(cityDepart);
+			Ville destination = cityRepository.findByVille(cityDestionation);
+			return dao.getTripsUsingCities(depart, destination);
+		}catch(Exception e) {
+			System.out.println("error get trips by cities and date : "+e.getMessage());
+			return null;
+		}	
 	}
 	
 	

@@ -16,14 +16,16 @@ import {MatButtonModule, MatCheckboxModule,MatSelectModule} from '@angular/mater
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {CitiesService} from './services/cities.service';
 import {TripService} from './services/trip.service';
-
+import { TypeaheadModule } from 'ngx-bootstrap';
+import { HttpModule } from '@angular/http';
+import {DatePipe} from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,MatSelectModule,HttpClientModule,BrowserAnimationsModule,MatButtonModule,MatAutocompleteModule, MatCheckboxModule],
+  imports: [BrowserModule,HttpModule, IonicModule.forRoot(),TypeaheadModule.forRoot(), AppRoutingModule,FormsModule,MatSelectModule,HttpClientModule,BrowserAnimationsModule,MatButtonModule,MatAutocompleteModule, MatCheckboxModule],
   providers: [
     StatusBar,CitiesService,TripService,
-    SplashScreen,
+    SplashScreen,DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

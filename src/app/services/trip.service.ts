@@ -25,10 +25,19 @@ export class TripService {
     saveTrip(trip : Annonce) : Observable<Annonce>{  
       this.user = new User();
       trip.createur = this.user;
+      let stringToSplit = trip.dateDepart;
+      let x = stringToSplit.split("T");
+      trip.shortDateDepart = x[0];
       return this.http.post<Annonce>(this.apiUrl+"/create",trip,httpOptions);
     }
     
     getAllTrips():Observable<Annonce>{
       return this.http.get<Annonce>(this.apiUrl+"/allTrips");
+    }
+    getTripsByCitiesAndDate(cityDepart,cityDestination,dateDepart){
+        return this.http.get(this.apiUrl+"/trips/"+cityDepart+"/"+cityDestination+"/"+dateDepart);
+    }
+    getTripsByCities(cityDepart,cityDestination){
+      return this.http.get(this.apiUrl+"/trips/"+cityDepart+"/"+cityDestination);
     }
 }
