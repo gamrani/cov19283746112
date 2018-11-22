@@ -34,7 +34,7 @@ export class AnnoncesPage implements OnInit {
   formControlValue = '';
 
   areCitiesDefined():boolean{
-    if(this.annonce.cityDestination == undefined || this.annonce.cityDepart == undefined || (this.annonce.escale == undefined && this.isEscale) || this.citiesAreEquals())
+    if(this.annonce.cityDestination == undefined || this.annonce.cityDepart == undefined || this.citiesAreEquals())
     {
       return false;
     }

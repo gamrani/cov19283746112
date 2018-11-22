@@ -16,6 +16,7 @@ import {MatButtonModule, MatCheckboxModule,MatSelectModule} from '@angular/mater
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {CitiesService} from './services/cities.service';
 import {TripService} from './services/trip.service';
+import {RegistrationService} from './services/registration.service';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { HttpModule } from '@angular/http';
 import {DatePipe} from '@angular/common';
@@ -24,7 +25,7 @@ import {DatePipe} from '@angular/common';
   entryComponents: [],
   imports: [BrowserModule,HttpModule, IonicModule.forRoot(),TypeaheadModule.forRoot(), AppRoutingModule,FormsModule,MatSelectModule,HttpClientModule,BrowserAnimationsModule,MatButtonModule,MatAutocompleteModule, MatCheckboxModule],
   providers: [
-    StatusBar,CitiesService,TripService,
+    StatusBar,CitiesService,TripService,RegistrationService,
     SplashScreen,DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

@@ -5,6 +5,8 @@ import {Constant} from './constants';
 import {Annonce} from '../../models/Annonce';
 import { AlertController } from '@ionic/angular';
 import { TripService } from '../services/trip.service';
+import{RegistrationService} from '../services/registration.service';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-proposer',
@@ -38,12 +40,16 @@ export class ProposerPage implements OnInit {
 
   hours ;
 
-  constructor(private citiesService : CitiesService,private tripService : TripService,private dateTimeService:DateTimeService,private alertCtrl: AlertController) {
+  constructor(private router: Router,
+              private userService:RegistrationService,
+              private citiesService : CitiesService,
+              private tripService : TripService,
+              private dateTimeService:DateTimeService,
+              private alertCtrl: AlertController
+              ) {
     this.annonce.places = 0;
     this.annonce.typeVoyage ="Aller simple";
     this.annonce.typeRoute = "Autoroute";
-
-
     this.annonce.dateDepart = this.dateTimeService.parseDateToStringWithFormat(new Date());
     this.annonce.dateArrivee = this.dateTimeService.parseDateToStringWithFormat(new Date());
     this.hours = Array(23).fill(0).map((x,i)=>i);
@@ -56,7 +62,35 @@ export class ProposerPage implements OnInit {
 
   ngOnInit() {
   }
-  
+  userIsAuthenticated():boolean{
+    this.userService.userIsAuthenticated().subscribe(
+      data =>{
+         if(data != null){
+           return true;
+         }
+      }
+    );
+    return false;
+  }
+  publier(){
+    if(this.userIsAuthenticated()){
+      this.saveTrip(this.annonce);
+    }else{
+      this.router.navigate(['/authentification']);
+    }
+  }
+  saveTrip(annonce:Annonce){
+    this.tripService.saveTrip(annonce).subscribe(
+      data => {
+        if(data == null){  
+          console.log("error"); 
+        } else{
+          console.log("success");
+        }
+      }
+    );
+  }
+
   step2Completed():boolean{
     if(this.annonce.places!=0){
       return true;
@@ -67,19 +101,8 @@ export class ProposerPage implements OnInit {
   confirmAnnonce():boolean{
     return false;
   }
-  valider(){
-
-     alert(this.annonce.dateDepart);
-      this.tripService.saveTrip(this.annonce).subscribe(
-        data => {
-          if(data == null){  
-            alert("error"); 
-          } else{
-            alert("success");
-          }
-        }
-      );;
-  }
+  
+  
   chooseTripType(type:string){
     this.annonce.typeVoyage = type;
     this.annonce.typeVoyage = type;

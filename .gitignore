@@ -29,6 +29,9 @@ plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
 
+Api/target
+Api/pom.xml
+Api/src/main/resources/application.properties
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate

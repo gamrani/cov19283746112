@@ -83,12 +83,12 @@
                         <label><strong>Date de départ : </strong><small>DD/MM/YYYY HH:MM:SS</small></label> 
                     </div>
                     <div>
-                            <input class="form-control" type="datetime-local" [(ngModel)]="annonce.dateDepart" name="date_aller" class="datetime-local-input">
+                            <input class="form-control" type="datetime-local" id="dateDepart" min="2018-11-21" [(ngModel)]="annonce.dateDepart" name="date_aller" class="datetime-local-input">
                     </div>     
                     <div *ngIf="annonce.typeVoyage == 'Aller retour'">
                         <label><strong>Date d'arrivée :</strong><small>DD/MM/YYYY HH:MM:SS</small></label> 
                       <div>
-                            <input class="form-control" type="datetime-local" [(ngModel)]="annonce.dateArrivee"  name="date_retour" class="datetime-local-input">
+                            <input class="form-control" type="datetime-local" id="dateArrivee"   min="2018-11-21" [(ngModel)]="annonce.dateArrivee"  name="date_retour" class="datetime-local-input">
                       </div> 
                     </div>
                     <br>
@@ -150,9 +150,25 @@
                   <span class="places"><i class="fas fa-users"></i> {{annonce.places}} place(s) disponible(s) </span>  
               </div>
              <div style="margin-top:10%">
-                <button class="btn btn-primary btn-lg btn-block"  [disabled]= "!annonce.prix" (click)="valider()" ion-button full>Publier</button>
+                <button class="btn btn-primary btn-lg btn-block"  [disabled]= "!annonce.prix" (click)="publier()" ion-button full>Publier</button>
              </div>
           </ion-card-content>
         </ion-card>
     </div>
 </form>
+<script>
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+   if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+  
+  today = yyyy+'-'+mm+'-'+dd;
+  document.getElementById("dateDepart").setAttribute("min", today);
+  document.getElementById("dateArrivee").setAttribute("min", today);
+  </script>

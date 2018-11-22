@@ -15,8 +15,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RegistrationService {
+  config = new Config();
   apiUrl = this.config.uriLocal;
-  constructor(private http: HttpClient,private config:Config) { }
+  constructor(private http: HttpClient) { }
 
   // user registration
   registration(user : User) : Observable<User>{  
@@ -31,5 +32,7 @@ export class RegistrationService {
     return this.http.get<Boolean>(this.apiUrl+"/phone/"+phone);
   }
 
-  
+  userIsAuthenticated():Observable<Boolean>{
+    return this.http.get<Boolean>(this.apiUrl+"/userIsAuthenticated");
+   }
 }

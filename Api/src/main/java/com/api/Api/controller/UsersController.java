@@ -43,10 +43,15 @@ public class UsersController {
 
 	private int phone;
 	
-	@RequestMapping("/user")
-	public Principal user(Principal principal) {
-		return principal;
+	@RequestMapping(value="/userIsAuthenticated",method=RequestMethod.GET)
+	public boolean user(Principal principal) {
+	if(principal!=null) {	
+		   return true;
+	   }else {
+		  return false;
+	    }
 	}
+	
 	
 	/** Sign up **/
 	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
