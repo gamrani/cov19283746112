@@ -13,6 +13,5 @@ export class AuthentificationPage implements OnInit {
   }
 
   retour(){
-    this.navCtrl.pop();
   }
 }
