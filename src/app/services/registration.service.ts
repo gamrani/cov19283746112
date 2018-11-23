@@ -35,4 +35,5 @@ export class RegistrationService {
   userIsAuthenticated():Observable<Boolean>{
     return this.http.get<Boolean>(this.apiUrl+"/userIsAuthenticated");
    }
+   
 }

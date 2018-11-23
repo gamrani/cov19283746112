@@ -13,5 +13,9 @@ export class AuthentificationPage implements OnInit {
   }
 
   retour(){
+    this.navCtrl.goBack();
+  }
+  facebookConnexion(){
+    
   }
 }
