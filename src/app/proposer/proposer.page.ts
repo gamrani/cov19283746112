@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { TripService } from '../services/trip.service';
 import{RegistrationService} from '../services/registration.service';
 import {Router} from "@angular/router"
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-proposer',
@@ -40,7 +41,8 @@ export class ProposerPage implements OnInit {
 
   hours ;
 
-  constructor(private router: Router,
+  constructor(public navCtrl: NavController,
+              private router: Router,
               private userService:RegistrationService,
               private citiesService : CitiesService,
               private tripService : TripService,
@@ -76,7 +78,7 @@ export class ProposerPage implements OnInit {
     if(this.userIsAuthenticated()){
       this.saveTrip(this.annonce);
     }else{
-      this.router.navigate(['/authentification']);
+      this.navCtrl.navigateForward("authentification");
     }
   }
   saveTrip(annonce:Annonce){

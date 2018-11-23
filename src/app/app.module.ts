@@ -20,14 +20,44 @@ import {RegistrationService} from './services/registration.service';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { HttpModule } from '@angular/http';
 import {DatePipe} from '@angular/common';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular-6-social-login";
+
+import { IonicStorageModule } from '@ionic/storage';
+
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("327837800995292")
+        },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("962009414646-75ip02db9djg08fshebmbm6egrflgu0a.apps.googleusercontent.com")
+        }
+      ]
+  );
+  return config;
+}
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,HttpModule, IonicModule.forRoot(),TypeaheadModule.forRoot(), AppRoutingModule,FormsModule,MatSelectModule,HttpClientModule,BrowserAnimationsModule,MatButtonModule,MatAutocompleteModule, MatCheckboxModule],
+  imports: [SocialLoginModule,BrowserModule,HttpModule, IonicStorageModule.forRoot(),IonicModule.forRoot(),TypeaheadModule.forRoot(), AppRoutingModule,FormsModule,MatSelectModule,HttpClientModule,BrowserAnimationsModule,MatButtonModule,MatAutocompleteModule, MatCheckboxModule],
   providers: [
     StatusBar,CitiesService,TripService,RegistrationService,
     SplashScreen,DatePipe,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, }
   ],
   bootstrap: [AppComponent]
 })

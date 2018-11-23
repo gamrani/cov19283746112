@@ -36,4 +36,7 @@ export class RegistrationService {
     return this.http.get<Boolean>(this.apiUrl+"/userIsAuthenticated");
    }
    
+   getUserByEmail(email:String):Observable<User>{
+      return this.http.get<User>(this.apiUrl+"/userByEmail/"+email);
+   }
 }

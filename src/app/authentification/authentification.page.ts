@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import {
+  AuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from 'angular-6-social-login';
+
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-authentification',
   templateUrl: './authentification.page.html',
@@ -7,7 +15,7 @@ import { NavController } from '@ionic/angular';
 })
 export class AuthentificationPage implements OnInit {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(private storage: Storage,public navCtrl: NavController,private socialAuthService: AuthService) { }
 
   ngOnInit() {
   }
@@ -15,7 +23,28 @@ export class AuthentificationPage implements OnInit {
   retour(){
     this.navCtrl.goBack();
   }
-  facebookConnexion(){
-    
+  public socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    if(socialPlatform == "facebook"){
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    }else if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    } 
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        if(userData){
+          console.log('user data : ',userData);
+          this.storage.set('token',userData.token);
+          this.storage.get('token').then((val) => {
+           if(val!=null) {
+             console.log('Token is : ', val);
+             
+            }
+          });          
+          //this.navCtrl.goBack();
+      }
+      
+      }
+    );
   }
 }
