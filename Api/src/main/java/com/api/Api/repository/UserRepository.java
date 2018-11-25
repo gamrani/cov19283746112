@@ -20,6 +20,7 @@ public interface UserRepository extends JpaRepository<Utilisateur,Long> {
      public Utilisateur findByPassword(String password);
      public Utilisateur findByEmailOrPhone(String email, Long phone);
      public Utilisateur findByToken(String token);
+     public Utilisateur findByEmailAndToken(String email,String token);
      
      @Transactional
      @Modifying

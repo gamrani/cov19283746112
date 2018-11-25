@@ -22,7 +22,8 @@ public class ApiApplication extends WebSecurityConfigurerAdapter{
 		.antMatchers("/",
 				"/login",
 				"/users/*",
-				"/trip/**")
+				"/trip/**",
+				"/users/**")
 		.permitAll()
 		.anyRequest().authenticated()
 		.and().logout().logoutSuccessUrl("/").permitAll();

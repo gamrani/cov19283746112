@@ -16,6 +16,7 @@ import {MatButtonModule, MatCheckboxModule,MatSelectModule} from '@angular/mater
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {CitiesService} from './services/cities.service';
 import {TripService} from './services/trip.service';
+import {AuthenticationService} from './services/auth.service';
 import {RegistrationService} from './services/registration.service';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { HttpModule } from '@angular/http';
@@ -51,7 +52,7 @@ export function getAuthServiceConfigs() {
   entryComponents: [],
   imports: [SocialLoginModule,BrowserModule,HttpModule, IonicStorageModule.forRoot(),IonicModule.forRoot(),TypeaheadModule.forRoot(), AppRoutingModule,FormsModule,MatSelectModule,HttpClientModule,BrowserAnimationsModule,MatButtonModule,MatAutocompleteModule, MatCheckboxModule],
   providers: [
-    StatusBar,CitiesService,TripService,RegistrationService,
+    StatusBar,CitiesService,TripService,RegistrationService,AuthenticationService,
     SplashScreen,DatePipe,
     {
       provide: AuthServiceConfig,

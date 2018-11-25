@@ -16,12 +16,12 @@ const httpOptions = {
 })
 export class RegistrationService {
   config = new Config();
-  apiUrl = this.config.uriLocal;
+  apiUrl = this.config.uriLocal+"/users";
   constructor(private http: HttpClient) { }
 
   // user registration
   registration(user : User) : Observable<User>{  
-    return this.http.post<User>(this.apiUrl,user,httpOptions);
+    return this.http.post<User>(this.apiUrl+"/registration",user,httpOptions);
   }
 
   // check email and phone existance
@@ -39,4 +39,11 @@ export class RegistrationService {
    getUserByEmail(email:String):Observable<User>{
       return this.http.get<User>(this.apiUrl+"/userByEmail/"+email);
    }
+   getUserByTokenAndEmail(email:string,token:string):Observable<User>{
+     return this.http.get<User>(this.apiUrl+"/user/"+email+"/"+token);
+   }
+   updateUserToken(token:string,user:User){
+     return this.http.post(this.apiUrl+"/newToken/"+token,user,httpOptions);
+   }
+   
 }

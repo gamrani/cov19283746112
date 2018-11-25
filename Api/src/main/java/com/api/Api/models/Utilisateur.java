@@ -35,6 +35,9 @@ public class Utilisateur implements Serializable{
 	private String birthday;
 
 	@Column
+	private String name;
+	
+	@Column
 	private String sexe;
 	
 	@Column
@@ -65,6 +68,15 @@ public class Utilisateur implements Serializable{
 	
 	public Utilisateur(String string) {
 		// TODO Auto-generated constructor stub
+	}
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getToken() {

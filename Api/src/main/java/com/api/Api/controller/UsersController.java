@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,11 +55,17 @@ public class UsersController {
 	
 	
 	/** Sign up **/
-	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public Utilisateur registration(@RequestBody Utilisateur utilisateur) {
 		// Crypter le mot de passe
-		utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
-		return services.registration(utilisateur);
+		//utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
+		try {
+			return services.registration(utilisateur);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/** Log in **/
@@ -72,7 +79,7 @@ public class UsersController {
 		
 		if (bCryptPasswordEncoder.matches(user.getPassword(), user_login.getPassword())) {
 			String jwt = tokenProvider.genrateToken(user_login);
-			services.setToken(jwt, user_login.getId());
+			services.setToken(jwt, user_login);
 			return jwt;
 
 		} else {
@@ -108,4 +115,18 @@ public class UsersController {
 	public List<Utilisateur> getAllUsers(){
 		return services.findAllUsers();
 	}
+	
+	@GetMapping("/userByEmail/{email}")
+	public Utilisateur findByEmail(@PathVariable("email")String email) {
+		return services.findByEmail(email);
+	}
+	@PostMapping("/newToken/{token}")
+	public int setToken(@PathVariable("token")String newToken,@RequestBody Utilisateur user) {
+		return services.setToken(newToken, user);
+	}
+	@GetMapping("/user/{email}/{token}")
+	public Utilisateur getUserByEmailAndToken(@PathVariable("email")String email,@PathVariable("token")String token) {
+		return services.findByEmailAndToken(email, token);
+	}
+	
 }
