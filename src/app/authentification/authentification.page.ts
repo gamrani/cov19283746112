@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {AuthenticationService} from '../services/auth.service';
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-authentification',
@@ -15,11 +16,12 @@ export class AuthentificationPage implements OnInit {
 
   ngOnInit() {
   }
+  token:string ;
 
   socialSignIn(platform:string){
       this.authService.socialSignIn(platform);
       this.navCtrl.goBack();
-      console.log(this.authService.userIsLoged());
+      console.log(this.authService.getEmailFromStorage());
   }
- 
+
 }

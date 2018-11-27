@@ -50,24 +50,25 @@ export class AuthenticationService {
   userIsLoged():User{
     let token:string =" ";
     let email:string = " ";
-    this.getTokenFromStorage();
-     this.storage.get('email').then((val) => {
-      email = val;
-     });
-    this.userService.getUserByTokenAndEmail(email,token).subscribe(
-      data =>{
-        this.user = data;
-      }
-    );
+    this.getEmailFromStorage();
     return this.user;
   }
-  token:string;
-getTokenFromStorage(){
-		this.storage.get('token').then(
-      (data)=> {
-        this.token=data;
-      } 
-    );
-    console.log(this.token);
+  userLoggedIn(x:any){
+    //this.token = x;
+    this.userService.getUserByEmail(x).subscribe(
+      data =>{
+        this.user = data;
+        
+        console.log(this.getCurrentUser());
+      }
+    ) 
+  }
+  getCurrentUser():User{
+    return this.user;
+  }
+  getEmailFromStorage(){
+     this.storage.get('email').then((val) => {
+       this.userLoggedIn(val);
+     });
   }
 }
